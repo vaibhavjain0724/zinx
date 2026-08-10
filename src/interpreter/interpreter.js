@@ -13,17 +13,16 @@ const ast = {
     }
 };
 
+let output = [];
 
 
-function interpret(node) {
-
+function interpret(node) {  
     if (node.type === "IntegerLiteral") {
         return node.value;
     }
     if (node.type === "ShowStatement") {
         const value = interpret(node.expression);
-        console.log(value);
-        return value;
+        output.add(value);
     }
 
     if (node.type === "BinaryExpression") {
@@ -43,4 +42,4 @@ console.log(interpret(ast))
 
 
 
-export {interpret}
+export {interpret , output}
