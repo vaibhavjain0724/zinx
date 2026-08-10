@@ -89,3 +89,7 @@ function lexer(code) {
 
 
 console.log(lexer("[show 10]"))
+
+
+
+export {lexer}
