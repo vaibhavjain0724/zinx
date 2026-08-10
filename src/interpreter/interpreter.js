@@ -23,6 +23,7 @@ function interpret(node) {
     if (node.type === "ShowStatement") {
         const value = interpret(node.expression);
         console.log(value);
+        return value;
     }
 
     if (node.type === "BinaryExpression") {
