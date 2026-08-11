@@ -3,19 +3,21 @@ function lexer(code) {
 
     const syntax = new Map();
     syntax.set("show", "SHOW");
+    syntax.set("+", "PLUS");
+    syntax.set("-", "MINUS");
+    syntax.set("*", "MULTIPLY");
+    syntax.set("/", "DIVIDE");
 
     let i = 0;
     const size = code.length;
 
     while (i < size) {
 
-        // Ignore whitespace
-        if (code[i] === ' ') {
+        if (/\s/.test(code[i])) {
             i++;
             continue;
         }
 
-        // Left bracket
         if (code[i] === '[') {
             tokens.push({
                 type: "LEFT_BRACKET",
@@ -26,7 +28,6 @@ function lexer(code) {
             continue;
         }
 
-        // Right bracket
         if (code[i] === ']') {
             tokens.push({
                 type: "RIGHT_BRACKET",
@@ -37,7 +38,6 @@ function lexer(code) {
             continue;
         }
 
-        // Number
         if (code[i] >= '0' && code[i] <= '9') {
             let number = "";
 
@@ -58,12 +58,11 @@ function lexer(code) {
             continue;
         }
 
-        // Identifier / keyword
         let keyword = "";
 
         while (
             i < size &&
-            code[i] !== ' ' &&
+            !/\s/.test(code[i]) &&
             code[i] !== '[' &&
             code[i] !== ']'
         ) {
@@ -87,9 +86,4 @@ function lexer(code) {
     return tokens;
 }
 
-
-console.log(lexer("[show 10]"))
-
-
-
-export {lexer}
+export { lexer };

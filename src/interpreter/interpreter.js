@@ -13,7 +13,7 @@ const ast = {
     }
 };
 
-let output = [];
+let outputArr = [];
 
 
 function interpret(node) {  
@@ -22,7 +22,7 @@ function interpret(node) {
     }
     if (node.type === "ShowStatement") {
         const value = interpret(node.expression);
-        output.add(value);
+        outputArr.push(value);
     }
 
     if (node.type === "BinaryExpression") {
@@ -42,4 +42,4 @@ console.log(interpret(ast))
 
 
 
-export {interpret , output}
+export {interpret , outputArr}

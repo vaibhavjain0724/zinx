@@ -1,6 +1,6 @@
 import { lexer } from "../src/lexer/lexer.js";
 import { parser } from "../src/parser/parser.js";
-import { interpret, output } from "../src/interpreter/interpreter.js";
+import { interpret, outputArr } from "../src/interpreter/interpreter.js";
 
 const codeElement = document.getElementById("code");
 const runButton = document.getElementById("run");
@@ -20,5 +20,6 @@ function runCode(code) {
     const value = interpret(ast);
 
 
-    output.innerHTML = value.join('\n');
+    output.innerHTML = outputArr.join('\n');
+    console.log(value);
 }
