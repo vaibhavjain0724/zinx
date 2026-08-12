@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zinx Documentation</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Zinx Documentation</h1>
+
+        <a href="./index.html" class="docs-link">
+            ← Back to Zinx
+        </a>
+
+        <div class="panel">
+            <h2>What is Zinx?</h2>
+
+            <p>
+                Zinx is a small Lisp-inspired programming language
+                built in vanilla JavaScript.
+            </p>
+
+            <p>
+                Zinx uses square brackets
+                <code>[ ]</code> for expressions and statements.
+            </p>
+        </div>
+
+        <div class="panel">
+            <h2>Basic Syntax</h2>
+
+            <p>
+                Zinx uses prefix notation. The operator or command
+                comes before its arguments.
+            </p>
+
+            <pre>[+ 5 10]</pre>
+
+            <p>is equivalent to:</p>
+
+            <pre>5 + 10</pre>
+        </div>
+
+        <div class="panel">
+            <h2>Output</h2>
+
+            <p>
+                Use <code>show</code> to display a value.
+            </p>
+
+            <pre>[show 10]</pre>
+
+            <p>Output:</p>
+
+            <pre>10</pre>
+        </div>
+
+        <div class="panel">
+            <h2>Arithmetic</h2>
+
+            <pre>[+ 5 10]</pre>
+            <pre>[- 10 5]</pre>
+            <pre>[* 5 2]</pre>
+            <pre>[/ 10 2]</pre>
+
+            <p>
+                Arithmetic expressions return a value.
+                They do not produce visible output by themselves.
+            </p>
+        </div>
+
+        <div class="panel">
+            <h2>Nested Expressions</h2>
+
+            <p>
+                Expressions can be used inside other expressions.
+            </p>
+
+            <pre>[+ 5 [* 2 3]]</pre>
+
+            <p>Result:</p>
+
+            <pre>11</pre>
+
+            <p>
+                Nested expressions can also be passed to
+                <code>show</code>.
+            </p>
+
+            <pre>[show [+ 5 [* 2 3]]]</pre>
+
+            <p>Output:</p>
+
+            <pre>11</pre>
+        </div>
+
+        <div class="panel">
+            <h2>Division by Zero</h2>
+
+            <p>
+                Division by zero is a runtime error in Zinx.
+            </p>
+
+            <pre>[/ 10 0]</pre>
+        </div>
+
+        <div class="panel">
+            <h2>How Zinx Works</h2>
+
+            <pre>
+Zinx Source Code
+       ↓
+     Lexer
+       ↓
+     Tokens
+       ↓
+     Parser
+       ↓
+      AST
+       ↓
+  Interpreter
+       ↓
+     Output
+            </pre>
+        </div>
+
+        <div class="panel">
+            <h2>Current Version</h2>
+
+            <p>
+                Zinx V0.1 is currently under development.
+            </p>
+
+            <p>Currently implemented:</p>
+
+            <ul>
+                <li>Integers</li>
+                <li>show</li>
+                <li>Arithmetic</li>
+                <li>Nested expressions</li>
+            </ul>
+
+            <p>Coming next:</p>
+
+            <ul>
+                <li>Variables</li>
+                <li>Strings</li>
+                <li>Booleans</li>
+                <li>Comparisons</li>
+                <li>Conditionals</li>
+                <li>Loops</li>
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>
