@@ -87,5 +87,8 @@ function interpret(node) {
         }
     }
 }
+function clearOutput() {
+    outputArr.length = 0;
+}
 
-export { interpret, outputArr };
+export { interpret, outputArr , clearOutput};
