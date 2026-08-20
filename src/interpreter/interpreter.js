@@ -50,7 +50,12 @@
 let outputArr = [];
 
 function interpret(node) {
-
+    if (node.type === "Program") {
+        for (const statement of node.statements) {
+            interpret(statement);
+        }
+        return;
+    }
     if (node.type === "IntegerLiteral") {
         return node.value;
     }
