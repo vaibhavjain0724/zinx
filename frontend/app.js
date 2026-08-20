@@ -17,14 +17,21 @@ function runCode(code) {
     clearOutput();
     const tokens = lexer(code);
 
-    console.log(tokens);
-    tokensElement.innerHTML = tokensElement.textContent = JSON.stringify(tokens, null, 2);
-    const ast = parser(tokens);
-    astElement.innerHTML = astElement.textContent = JSON.stringify(ast, null, 2);
-    console.log(ast);
-    const value = interpret(ast);
+    try {
+        console.log(tokens);
+        tokensElement.innerHTML = tokensElement.textContent = JSON.stringify(tokens, null, 2);
+        const ast = parser(tokens);
+        astElement.innerHTML = astElement.textContent = JSON.stringify(ast, null, 2);
+        console.log(ast);
+        const value = interpret(ast);
+        output.innerHTML = outputArr.join('\n');
+        console.log(value);
+    }
+    catch(error){
+        output.innerHTML = `Error ${error.message}`
+        console.log(error);
+    }
 
 
-    output.innerHTML = outputArr.join('\n');
-    console.log(value);
+    
 }
