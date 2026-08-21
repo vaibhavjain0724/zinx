@@ -2,7 +2,7 @@ import { lexer } from "../src/lexer/lexer.js";
 import { parser } from "../src/parser/parser.js";
 import { interpret, outputArr, clearOutput } from "../src/interpreter/interpreter.js";
 
-import {updateHis , delHis , mostRecentHis, previousHis} from "../src/history.js";
+import {updateHis , delHis , mostRecentHis, previousHis , nextHis} from "../src/history.js";
 
 const codeElement = document.getElementById("code");
 const runButton = document.getElementById("run");
@@ -30,6 +30,8 @@ function updateOutput(element, arr){
 const prevButton = document.getElementById("prevButton");
 const recentButton = document.getElementById("recentButton");
 const deleteHis = document.getElementById("deleteHis");
+const nextButton = document.getElementById("nextButton");
+
 prevButton.addEventListener("click", () => {
     const code = previousHis();
     codeElement.value = code;
@@ -38,12 +40,18 @@ prevButton.addEventListener("click", () => {
 
 recentButton.addEventListener("click" , () => {
     const code = mostRecentHis();
-    codeElement.textContent = code;
+    codeElement.value = code;
     runCode(code); 
 })
 
 deleteHis.addEventListener("click",  () => {
     delHis();
+})
+
+nextButton.addEventListener("click", () => {
+    const code = nextHis();
+    codeElement.value = code;
+    runCode(code);
 })
 
 

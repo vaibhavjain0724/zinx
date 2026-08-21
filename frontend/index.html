@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,48 +11,55 @@
 
 <body>
 
-    <div class="container">
+    <h1>Zinx</h1>
 
-        <h1>Zinx</h1>
-        
-        <button id="prevButton">Previous Code</button>
-        <button id="recentButton">Most recent Code</button>
-        <button id="deleteHis">Clear History</button>
+    <div class="toolbar-section">
+        <h2>History</h2>
+
+        <div class="history-buttons">
+            <button id="prevButton">Previous</button>
+            <button id="nextButton">Next</button>
+            <button id="recentButton">Most Recent Code</button>
+            <button id="deleteHis">Clear History</button>
+        </div>
+    </div>
+
+    <div class="toolbar-section documentation-section">
+        <h2>Documentation</h2>
+
         <a href="./docs.html" class="docs-link">
             Documentation
         </a>
+    </div>
+    <div class="editor">
+        <textarea id="code" placeholder="Enter Zinx code"></textarea>
 
-        <div class="editor">
-            <textarea
-                id="code"
-                placeholder="Enter Zinx code"
-            ></textarea>
+        <button id="run">Run</button>
+    </div>
 
-            <button id="run">Run</button>
+    <div class="panel output-panel">
+        <h2>Output</h2>
+        <pre id="output"></pre>
+    </div>
+
+    <div class="debug-panels">
+
+        <div class="panel">
+            <h2>Tokens</h2>
+            <pre id="tokens"></pre>
         </div>
 
-        <div class="panel output-panel">
-            <h2>Output</h2>
-            <pre id="output"></pre>
+        <div class="panel">
+            <h2>AST</h2>
+            <pre id="ast"></pre>
         </div>
 
-        <div class="debug-panels">
-
-            <div class="panel">
-                <h2>Tokens</h2>
-                <pre id="tokens"></pre>
-            </div>
-
-            <div class="panel">
-                <h2>AST</h2>
-                <pre id="ast"></pre>
-            </div>
-
-        </div>
+    </div>
 
     </div>
 
     <script type="module" src="./app.js"></script>
 
 </body>
+
 </html>

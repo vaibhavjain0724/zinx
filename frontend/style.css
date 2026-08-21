@@ -135,13 +135,29 @@ h1 {
     font-size: 32px;
 }
 
-/* ==================== TOOLBAR ==================== */
+/* ==================== TOOLBAR SECTIONS ==================== */
+
+.toolbar-section {
+    margin-bottom: 25px;
+}
+
+.toolbar-section h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.history-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
 
 #prevButton,
+#nextButton,
 #recentButton,
 #deleteHis {
     padding: 9px 14px;
-    margin-right: 8px;
 
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -154,6 +170,7 @@ h1 {
 }
 
 #prevButton:hover,
+#nextButton:hover,
 #recentButton:hover,
 #deleteHis:hover {
     background: #eee;
@@ -170,12 +187,14 @@ h1 {
     background: #fff0f0;
 }
 
-/* Documentation */
+/* ==================== DOCUMENTATION ==================== */
+
+.documentation-section {
+    padding-bottom: 5px;
+}
 
 .docs-link {
     display: inline-block;
-    margin-top: 15px;
-    margin-bottom: 25px;
 
     padding: 9px 14px;
 
