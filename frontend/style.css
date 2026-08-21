@@ -1,4 +1,4 @@
-
+/* 
 
 
 * {
@@ -110,4 +110,233 @@ h1 {
 
 .docs-link + .editor {
     margin-top: 10px;
+} */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ==================== HEADER ==================== */
+
+h1 {
+    margin: 0 0 20px;
+    font-size: 32px;
+}
+
+/* ==================== TOOLBAR ==================== */
+
+#prevButton,
+#recentButton,
+#deleteHis {
+    padding: 9px 14px;
+    margin-right: 8px;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    background: white;
+    color: #333;
+
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#prevButton:hover,
+#recentButton:hover,
+#deleteHis:hover {
+    background: #eee;
+}
+
+/* Clear history */
+
+#deleteHis {
+    color: #b00020;
+    border-color: #e0b4b4;
+}
+
+#deleteHis:hover {
+    background: #fff0f0;
+}
+
+/* Documentation */
+
+.docs-link {
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 25px;
+
+    padding: 9px 14px;
+
+    text-decoration: none;
+    color: #333;
+
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.docs-link:hover {
+    background: #eee;
+}
+
+/* ==================== EDITOR ==================== */
+
+.editor {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+#code {
+    flex: 1;
+
+    min-height: 180px;
+    resize: vertical;
+
+    padding: 14px;
+
+    font-family: monospace;
+    font-size: 16px;
+    line-height: 1.5;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    background: white;
+    color: #222;
+}
+
+#code:focus {
+    outline: none;
+    border-color: #888;
+}
+
+#run {
+    align-self: flex-start;
+
+    padding: 12px 30px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: #222;
+    color: white;
+
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#run:hover {
+    background: #444;
+}
+
+/* ==================== PANELS ==================== */
+
+.panel {
+    background: white;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    margin-bottom: 20px;
+}
+
+.panel h2 {
+    margin: 0;
+
+    padding: 14px 20px;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.panel pre {
+    margin: 0;
+
+    padding: 18px 20px;
+
+    min-height: 70px;
+
+    overflow: auto;
+
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.5;
+
+    background: #f8f8f8;
+
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+/* ==================== OUTPUT ==================== */
+
+.output-panel {
+    margin-bottom: 25px;
+}
+
+.output-panel pre {
+    min-height: 80px;
+}
+
+/* ==================== TOKENS / AST ==================== */
+
+.debug-panels {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+
+/* ==================== MOBILE ==================== */
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 20px;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    .editor {
+        flex-direction: column;
+    }
+
+    #code {
+        min-height: 200px;
+        width: 100%;
+    }
+
+    #run {
+        width: 100%;
+    }
+
+    .debug-panels {
+        grid-template-columns: 1fr;
+    }
+
+    #prevButton,
+    #recentButton,
+    #deleteHis {
+        margin-bottom: 8px;
+    }
 }

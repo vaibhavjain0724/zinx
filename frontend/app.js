@@ -2,6 +2,8 @@ import { lexer } from "../src/lexer/lexer.js";
 import { parser } from "../src/parser/parser.js";
 import { interpret, outputArr, clearOutput } from "../src/interpreter/interpreter.js";
 
+import {updateHis , delHis , mostRecentHis, previousHis} from "../src/history.js";
+
 const codeElement = document.getElementById("code");
 const runButton = document.getElementById("run");
 const output = document.getElementById("output");
@@ -11,20 +13,60 @@ runButton.addEventListener("click", () => {
     const code = codeElement.value;
 
     runCode(code);
+    updateHis(code);
 });
+
+
+function update(element, content){
+    element.textContent = JSON.stringify(content, null , 2);
+    //The 2 means: indent nested objects by 2 spaces.
+    //textContent = put text inside an element.
+    //innerHTML = interpret the content as HTML.
+}
+function updateOutput(element, arr){
+    element.innerHTML = arr.join('\n');
+}
+
+const prevButton = document.getElementById("prevButton");
+const recentButton = document.getElementById("recentButton");
+const deleteHis = document.getElementById("deleteHis");
+prevButton.addEventListener("click", () => {
+    const code = previousHis();
+    codeElement.value = code;
+    runCode(code);
+})
+
+recentButton.addEventListener("click" , () => {
+    const code = mostRecentHis();
+    codeElement.textContent = code;
+    runCode(code); 
+})
+
+deleteHis.addEventListener("click",  () => {
+    delHis();
+})
+
 
 function runCode(code) {
     clearOutput();
-    const tokens = lexer(code);
 
     try {
+        const tokens = lexer(code);
         console.log(tokens);
-        tokensElement.innerHTML = tokensElement.textContent = JSON.stringify(tokens, null, 2);
+        
+        //JSON.stringify() converts a JavaScript value/object into a string representation of JSON.
         const ast = parser(tokens);
-        astElement.innerHTML = astElement.textContent = JSON.stringify(ast, null, 2);
+        setTimeout(() => {
+            update(tokensElement, tokens)
+        }, 500)
+         setTimeout(() => {
+            update(astElement, ast)
+        }, 900)
         console.log(ast);
         const value = interpret(ast);
-        output.innerHTML = outputArr.join('\n');
+         setTimeout(() => {
+            updateOutput(output,  outputArr);
+        }, 1100)
         console.log(value);
     }
     catch(error){

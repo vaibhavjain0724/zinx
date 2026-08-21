@@ -232,6 +232,21 @@ function parser(tokens) {
             statements: statements
         };
     }
+    function parseVariableDeclaration() {
+        expect("LET");
+
+        const name = expect("IDENTIFIER");
+
+        const value = parseExpression();
+
+        expect("RIGHT_PAREN");
+
+        return {
+            type: "VariableDeclaration",
+            name: name.value,
+            value: value
+        };
+    }
 
     return parse();
 }
