@@ -46,14 +46,31 @@
 
 
 
-
+function restart(){
+    clearOutput();
+    statement = 0;
+    sessionStorage.removeItem("statement");
+}
 let outputArr = [];
-
-function interpret(node) {
+let statement = sessionStorage.getItem("statement");
+if(statement == null) statement= 0 ;
+ function interpret(node) {
     if (node.type === "Program") {
-        for (const statement of node.statements) {
-            interpret(statement);
-        }
+        if(statement >= node.statements.length) return;
+
+        interpret(node.statements[statement]);
+        statement++;
+        sessionStorage.setItem("statement", statement);
+        // for (const statement of node.statements) {
+        //     interpret(statement);
+            
+
+        // }
+    
+        // for(let i = statement +1; i < node.statements.length ; i++){
+        //     interpret(i);
+        //     statement++;
+        // }
         return;
     }
     if (node.type === "IntegerLiteral") {
@@ -96,4 +113,4 @@ function clearOutput() {
     outputArr.length = 0;
 }
 
-export { interpret, outputArr , clearOutput};
+export { interpret, outputArr , restart};

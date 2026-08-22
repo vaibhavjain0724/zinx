@@ -1,6 +1,6 @@
 import { lexer } from "../src/lexer/lexer.js";
 import { parser } from "../src/parser/parser.js";
-import { interpret, outputArr, clearOutput } from "../src/interpreter/interpreter.js";
+import { interpret, outputArr, restart } from "../src/interpreter/interpreter.js";
 
 import {updateHis , delHis , mostRecentHis, previousHis , nextHis} from "../src/history.js";
 
@@ -9,13 +9,20 @@ const runButton = document.getElementById("run");
 const output = document.getElementById("output");
 const tokensElement = document.getElementById("tokens");
 const astElement = document.getElementById("ast");
+
+
 runButton.addEventListener("click", () => {
     const code = codeElement.value;
-
-    runCode(code);
+    restart();
+     runCode(code);
     updateHis(code);
 });
 
+
+const stepButton = document.getElementById("step");
+stepButton.addEventListener("click" , () => {
+    interpretUpd(currentAST);
+})
 
 function update(element, content){
     element.textContent = JSON.stringify(content, null , 2);
@@ -54,28 +61,30 @@ nextButton.addEventListener("click", () => {
     runCode(code);
 })
 
+let currentAST;
+
+function interpretUpd(ast){
+    interpret(ast);
+    updateOutput(output,  outputArr);
+}
 
 function runCode(code) {
-    clearOutput();
 
     try {
         const tokens = lexer(code);
         console.log(tokens);
         
         //JSON.stringify() converts a JavaScript value/object into a string representation of JSON.
-        const ast = parser(tokens);
+        currentAST = parser(tokens);
         setTimeout(() => {
             update(tokensElement, tokens)
         }, 500)
+        
          setTimeout(() => {
-            update(astElement, ast)
+            interpretUpd(currentAST);
         }, 900)
-        console.log(ast);
-        const value = interpret(ast);
-         setTimeout(() => {
-            updateOutput(output,  outputArr);
-        }, 1100)
-        console.log(value);
+        console.log(currentAST);
+        
     }
     catch(error){
         output.innerHTML = `Error ${error.message}`
@@ -85,3 +94,6 @@ function runCode(code) {
 
     
 }
+
+
+
