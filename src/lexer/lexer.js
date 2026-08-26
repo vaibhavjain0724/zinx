@@ -98,8 +98,7 @@ function lexer(code) {
     syntax.set("-", "MINUS");
     syntax.set("*", "MULTIPLY");
     syntax.set("/", "DIVIDE");
-    syntax.set("let", "LET");
-
+    syntax.set("set" , "SET");
     let i = 0;
     const size = code.length;
 
