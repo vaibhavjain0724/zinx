@@ -189,14 +189,14 @@ h1 {
 
 /* ==================== DOCUMENTATION ==================== */
 
-.documentation-section {
-    padding-bottom: 5px;
-}
+/* ==================== DOCUMENTATION ==================== */
 
 .docs-link {
     display: inline-block;
 
-    padding: 9px 14px;
+    padding: 10px 16px;
+
+    margin-bottom: 25px;
 
     text-decoration: none;
     color: #333;
@@ -208,6 +208,97 @@ h1 {
 
 .docs-link:hover {
     background: #eee;
+}
+
+/* Documentation panels */
+
+.panel {
+    background: white;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    margin-bottom: 25px;
+}
+
+.panel h2 {
+    margin: 0;
+
+    padding: 16px 24px;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.panel h3 {
+    margin: 24px 28px 12px;
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.panel p,
+.panel ul {
+    margin: 18px 28px;
+
+    line-height: 1.7;
+}
+
+.panel ul {
+    padding-left: 24px;
+}
+
+/* Code examples */
+
+.panel pre {
+    margin: 18px 28px;
+
+    padding: 16px 18px;
+
+    overflow-x: auto;
+
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.7;
+
+    background: #f5f5f5;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+/* Inline code */
+
+.panel code {
+    padding: 2px 5px;
+
+    font-family: monospace;
+    font-size: 0.95em;
+
+    background: #f0f0f0;
+
+    border-radius: 4px;
+}
+
+/* Code blocks should not have inline-code styling */
+
+.panel pre code {
+    padding: 0;
+
+    background: transparent;
+}
+
+/* Documentation flow diagram */
+
+.panel pre:last-child {
+    white-space: pre;
 }
 
 /* ==================== EDITOR ==================== */
