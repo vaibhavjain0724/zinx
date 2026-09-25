@@ -37,6 +37,15 @@ function parser(tokens) {
         };
     }
 
+    function parseBoolean() {
+        const token = consume();
+
+        return {
+            type: "BooleanLiteral",
+            value: token.type === "TRUE"
+        };
+    }
+
     function parseIdentifier() {
         const token = expect("IDENTIFIER");
 
@@ -50,6 +59,10 @@ function parser(tokens) {
 
         if (peek().type === "INTEGER") {
             return parseInteger();
+        }
+
+        if (peek().type === "TRUE" || peek().type === "FALSE") {
+            return parseBoolean();
         }
 
         if (peek().type === "IDENTIFIER") {

@@ -4,6 +4,8 @@ function lexer(code) {
 
     const syntax = new Map();
     syntax.set("show", "SHOW");
+    syntax.set("true", "TRUE");
+    syntax.set("false", "FALSE");
     syntax.set("+", "PLUS");
     syntax.set("-", "MINUS");
     syntax.set("*", "MULTIPLY");
