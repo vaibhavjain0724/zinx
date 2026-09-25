@@ -9,6 +9,114 @@ const runButton = document.getElementById("run");
 const output = document.getElementById("output");
 const tokensElement = document.getElementById("tokens");
 const astElement = document.getElementById("ast");
+const highlightedCode = document.getElementById("highlightedCode");
+
+function escapeHTML(text) {
+    return text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+}
+
+function highlightCode(code) {
+
+    const tokens = lexer(code);
+
+    let result = "";
+    let position = 0;
+
+    for (const token of tokens) {
+
+        // Find where this token appears in the original source
+        const value = String(token.value);
+        const index = code.indexOf(value, position);
+
+        // Add everything before this token unchanged
+        result += escapeHTML(code.substring(position, index));
+
+        // Add the highlighted token
+        switch (token.type) {
+
+            case "SHOW":
+            case "SET":
+                result += `<span class="keyword">${escapeHTML(value)}</span>`;
+                break;
+
+            case "TRUE":
+            case "FALSE":
+                result += `<span class="boolean">${escapeHTML(value)}</span>`;
+                break;
+
+            case "PLUS":
+            case "MINUS":
+            case "MULTIPLY":
+            case "DIVIDE":
+                result += `<span class="operator">${escapeHTML(value)}</span>`;
+                break;
+
+            case "INTEGER":
+                result += `<span class="number">${escapeHTML(value)}</span>`;
+                break;
+
+            case "LEFT_PAREN":
+            case "RIGHT_PAREN":
+                result += `<span class="bracket">${escapeHTML(value)}</span>`;
+                break;
+
+            default:
+                result += escapeHTML(value);
+        }
+
+        position = index + value.length;
+    }
+
+    // Add anything left after the final token
+    result += escapeHTML(code.substring(position));
+
+    return result;
+}
+
+// function highlightCode(code) {
+
+//     const tokens = lexer(code);
+
+//     return tokens.map(token => {
+
+//         switch (token.type) {
+
+//             case "SHOW":
+//             case "SET":
+//                 return `<span class="keyword">${token.value}</span>`;
+
+//             case "TRUE":
+//             case "FALSE":
+//                 return `<span class="boolean">${token.value}</span>`;
+
+//             case "PLUS":
+//             case "MINUS":
+//             case "MULTIPLY":
+//             case "DIVIDE":
+//                 return `<span class="operator">${token.value}</span>`;
+
+//             case "INTEGER":
+//                 return `<span class="number">${token.value}</span>`;
+
+//             case "LEFT_PAREN":
+//             case "RIGHT_PAREN":
+//                 return `<span class="bracket">${token.value}</span>`;
+
+//             default:
+//                 return token.value;
+//         }
+
+//     }).join(" ");
+// }
+
+function updateHighlight() {
+    highlightedCode.innerHTML = highlightCode(codeElement.value);
+}
+codeElement.addEventListener("input", updateHighlight);
+
 
 function executeCode() {
     const code = codeElement.value;

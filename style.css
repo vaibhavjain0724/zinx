@@ -1,116 +1,3 @@
-/* 
-
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    padding: 40px;
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-h1 {
-    margin-bottom: 10px;
-}
-
-.docs-link {
-    display: block;
-    width: fit-content;
-    margin-left: auto;
-    margin-bottom: 25px;
-    padding: 10px 16px;
-    text-decoration: none;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    color: #333;
-    background: white;
-}
-
-.docs-link:hover {
-    background: #eee;
-}
-
-.editor {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 25px;
-}
-
-#code {
-    flex: 1;
-    min-height: 50px;
-    padding: 12px;
-    font-family: monospace;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-}
-
-#run {
-    padding: 12px 30px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.panel {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-
-.panel h2 {
-    margin: 0;
-    padding: 14px 20px;
-    font-size: 17px;
-    border-bottom: 1px solid #ddd;
-}
-
-.panel p,
-.panel ul {
-    margin: 18px 20px;
-    line-height: 1.6;
-}
-
-.panel pre {
-    margin: 18px 20px;
-    padding: 14px;
-    overflow: auto;
-    font-family: monospace;
-    font-size: 14px;
-    line-height: 1.5;
-    background: #f5f5f5;
-    border-radius: 6px;
-}
-
-.output-panel {
-    margin-bottom: 25px;
-}
-
-.output-panel pre {
-    min-height: 60px;
-}
-
-.debug-panels {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.docs-link + .editor {
-    margin-top: 10px;
-} */
 * {
     box-sizing: border-box;
 }
@@ -176,8 +63,6 @@ h1 {
     background: #eee;
 }
 
-/* Clear history */
-
 #deleteHis {
     color: #b00020;
     border-color: #e0b4b4;
@@ -189,13 +74,10 @@ h1 {
 
 /* ==================== DOCUMENTATION ==================== */
 
-/* ==================== DOCUMENTATION ==================== */
-
 .docs-link {
     display: inline-block;
 
     padding: 10px 16px;
-
     margin-bottom: 25px;
 
     text-decoration: none;
@@ -210,7 +92,7 @@ h1 {
     background: #eee;
 }
 
-/* Documentation panels */
+/* ==================== PANELS ==================== */
 
 .panel {
     background: white;
@@ -252,7 +134,7 @@ h1 {
     padding-left: 24px;
 }
 
-/* Code examples */
+/* ==================== CODE EXAMPLES ==================== */
 
 .panel pre {
     margin: 18px 28px;
@@ -274,8 +156,6 @@ h1 {
     overflow-wrap: break-word;
 }
 
-/* Inline code */
-
 .panel code {
     padding: 2px 5px;
 
@@ -287,15 +167,10 @@ h1 {
     border-radius: 4px;
 }
 
-/* Code blocks should not have inline-code styling */
-
 .panel pre code {
     padding: 0;
-
     background: transparent;
 }
-
-/* Documentation flow diagram */
 
 .panel pre:last-child {
     white-space: pre;
@@ -309,33 +184,123 @@ h1 {
     margin-bottom: 25px;
 }
 
-#code {
+/*
+    This is the actual editor area.
+
+    highlightedCode sits underneath.
+    textarea sits on top and handles typing.
+*/
+
+.code-editor {
+    position: relative;
+
     flex: 1;
 
     min-height: 180px;
-    resize: vertical;
 
+    overflow: hidden;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    background: #111;
+}
+
+#highlightedCode,
+#code {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
     padding: 14px;
+
+    box-sizing: border-box;
 
     font-family: monospace;
     font-size: 16px;
     line-height: 1.5;
 
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    white-space: pre-wrap;
+    overflow: auto;
+}
+
+/* Highlighted code underneath */
+
+#highlightedCode {
+    pointer-events: none;
+
+    color: #222;
 
     background: white;
-    color: #222;
 }
 
-#code:focus {
+/* Actual textarea */
+
+#code {
+    resize: none;
+
+    border: none;
     outline: none;
+
+    background: transparent;
+
+    /*
+        Hide the textarea's text because
+        highlightedCode is displaying it.
+    */
+    color: transparent;
+
+    /*
+        Keep the cursor visible.
+    */
+    caret-color: #222;
+}
+
+#code::selection {
+    background: rgba(100, 150, 255, 0.3);
+}
+
+.code-editor:focus-within {
     border-color: #888;
 }
+
+/* ==================== SYNTAX HIGHLIGHTING ==================== */
+
+.keyword {
+    color: #8a2be2;
+    font-weight: 600;
+}
+
+.boolean {
+    color: #c05a00;
+}
+
+.operator {
+    color: #008000;
+}
+
+.number {
+    color: #0066cc;
+}
+
+.bracket {
+    color: #555;
+}
+
+/* ==================== EDITOR BUTTONS ==================== */
+
 .editor-buttons {
     display: flex;
+
     flex-direction: column;
+
     gap: 10px;
+
     align-self: flex-start;
 }
 
@@ -350,6 +315,7 @@ h1 {
     color: white;
 
     cursor: pointer;
+
     font-size: 16px;
 }
 
@@ -437,12 +403,13 @@ h1 {
         flex-direction: column;
     }
 
-    #code {
+    .code-editor {
         min-height: 200px;
         width: 100%;
     }
 
-    #run {
+    #run,
+    #step {
         width: 100%;
     }
 
