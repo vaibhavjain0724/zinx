@@ -3,11 +3,14 @@
 }
 
 body {
-    margin: 0;
-    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 36px 32px 48px;
+
     font-family: Arial, sans-serif;
-    background: #f5f5f5;
-    color: #222;
+
+    background: #f6f7f9;
+    color: #20242a;
 }
 
 .container {
@@ -18,18 +21,22 @@ body {
 /* ==================== HEADER ==================== */
 
 h1 {
-    margin: 0 0 20px;
+    margin: 0 0 24px;
+
     font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
-/* ==================== TOOLBAR SECTIONS ==================== */
+/* ==================== TOOLBAR ==================== */
 
 .toolbar-section {
-    margin-bottom: 25px;
+    margin-bottom: 24px;
 }
 
 .toolbar-section h2 {
     margin: 0 0 10px;
+
     font-size: 18px;
     font-weight: 600;
 }
@@ -54,6 +61,8 @@ h1 {
 
     cursor: pointer;
     font-size: 14px;
+
+    transition: background 0.15s ease;
 }
 
 #prevButton:hover,
@@ -84,127 +93,70 @@ h1 {
     color: #333;
 
     background: white;
+
     border: 1px solid #ccc;
     border-radius: 6px;
+
+    transition: background 0.15s ease;
 }
 
 .docs-link:hover {
     background: #eee;
 }
 
-/* ==================== PANELS ==================== */
-
-.panel {
-    background: white;
-
-    border: 1px solid #ddd;
-    border-radius: 8px;
-
-    overflow: hidden;
-
-    margin-bottom: 25px;
-}
-
-.panel h2 {
-    margin: 0;
-
-    padding: 16px 24px;
-
-    font-size: 20px;
-    font-weight: 600;
-
-    border-bottom: 1px solid #ddd;
-}
-
-.panel h3 {
-    margin: 24px 28px 12px;
-
-    font-size: 17px;
-    font-weight: 600;
-}
-
-.panel p,
-.panel ul {
-    margin: 18px 28px;
-
-    line-height: 1.7;
-}
-
-.panel ul {
-    padding-left: 24px;
-}
-
-/* ==================== CODE EXAMPLES ==================== */
-
-.panel pre {
-    margin: 18px 28px;
-
-    padding: 16px 18px;
-
-    overflow-x: auto;
-
-    font-family: monospace;
-    font-size: 14px;
-    line-height: 1.7;
-
-    background: #f5f5f5;
-
-    border: 1px solid #e5e5e5;
-    border-radius: 6px;
-
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-}
-
-.panel code {
-    padding: 2px 5px;
-
-    font-family: monospace;
-    font-size: 0.95em;
-
-    background: #f0f0f0;
-
-    border-radius: 4px;
-}
-
-.panel pre code {
-    padding: 0;
-    background: transparent;
-}
-
-.panel pre:last-child {
-    white-space: pre;
-}
-
 /* ==================== EDITOR ==================== */
 
 .editor {
     display: flex;
-    gap: 10px;
+
+    gap: 12px;
+
     margin-bottom: 25px;
 }
-
-/*
-    This is the actual editor area.
-
-    highlightedCode sits underneath.
-    textarea sits on top and handles typing.
-*/
 
 .code-editor {
     position: relative;
 
     flex: 1;
+    min-width: 0;
 
-    min-height: 180px;
+    height: 300px;
+    min-height: 220px;
 
     overflow: hidden;
 
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    background: white;
 
-    background: #111;
+    border: 1px solid #cfd5dc;
+    border-radius: 8px;
+
+    box-shadow: 0 1px 2px rgba(24, 33, 43, 0.05);
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
 }
+
+.code-editor:focus-within {
+    border-color: #888;
+
+    box-shadow:
+        0 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+/*
+    Both layers must have identical:
+    - position
+    - dimensions
+    - padding
+    - font
+    - font size
+    - line height
+    - whitespace behavior
+
+    This keeps the highlighted text aligned
+    with the real textarea.
+*/
 
 #highlightedCode,
 #code {
@@ -219,77 +171,120 @@ h1 {
     margin: 0;
     padding: 14px;
 
+    border: 0;
+
     box-sizing: border-box;
 
-    font-family: monospace;
-    font-size: 16px;
-    line-height: 1.5;
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        Menlo,
+        monospace;
+
+    font-size: 15px;
+
+    line-height: 1.6;
 
     white-space: pre-wrap;
-    overflow: auto;
+    overflow-wrap: break-word;
+    tab-size: 4;
+    scrollbar-gutter: stable;
 }
 
-/* Highlighted code underneath */
+/* ==================== HIGHLIGHTED CODE ==================== */
+
+/*
+    This is the visual layer.
+
+    It shows the syntax-highlighted version
+    of whatever the user typed.
+*/
 
 #highlightedCode {
+    z-index: 1;
+
+    /* It only follows the textarea's scroll position through JavaScript. */
+    overflow: hidden;
+
     pointer-events: none;
 
-    color: #222;
-
     background: white;
+
+    color: #222;
 }
 
-/* Actual textarea */
+/* ==================== REAL TEXTAREA ==================== */
+
+/*
+    This is the actual input element.
+
+    It sits above the highlighted layer.
+*/
 
 #code {
+    z-index: 2;
+
     resize: none;
 
-    border: none;
+    /*
+        The textarea is the ONLY scrolling layer.
+    */
+
+    overflow: auto;
+
     outline: none;
 
     background: transparent;
 
     /*
-        Hide the textarea's text because
-        highlightedCode is displaying it.
+        The textarea receives all editing input, but its text stays transparent
+        so it does not cover the syntax-highlighted text in the layer below.
     */
+
     color: transparent;
 
     /*
         Keep the cursor visible.
     */
+
     caret-color: #222;
 }
+
+/* Keep the empty editor discoverable while typed text stays transparent. */
+#code::placeholder {
+    color: #7a838e;
+    opacity: 1;
+}
+
+/*
+    Highlight selected text.
+*/
 
 #code::selection {
     background: rgba(100, 150, 255, 0.3);
 }
 
-.code-editor:focus-within {
-    border-color: #888;
-}
-
 /* ==================== SYNTAX HIGHLIGHTING ==================== */
 
 .keyword {
-    color: #8a2be2;
-    font-weight: 600;
+    color: #7c3aed;
 }
 
 .boolean {
-    color: #c05a00;
+    color: #c2410c;
 }
 
 .operator {
-    color: #008000;
+    color: #15803d;
 }
 
 .number {
-    color: #0066cc;
+    color: #2563eb;
 }
 
 .bracket {
-    color: #555;
+    color: #666;
 }
 
 /* ==================== EDITOR BUTTONS ==================== */
@@ -306,7 +301,7 @@ h1 {
 
 #run,
 #step {
-    padding: 12px 30px;
+    padding: 11px 28px;
 
     border: none;
     border-radius: 6px;
@@ -316,7 +311,12 @@ h1 {
 
     cursor: pointer;
 
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 500;
+
+    transition:
+        background 0.15s ease,
+        transform 0.05s ease;
 }
 
 #run:hover,
@@ -324,17 +324,24 @@ h1 {
     background: #444;
 }
 
+#run:active,
+#step:active {
+    transform: translateY(1px);
+}
+
 /* ==================== PANELS ==================== */
 
 .panel {
-    background: white;
-
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    margin-bottom: 25px;
 
     overflow: hidden;
 
-    margin-bottom: 20px;
+    background: white;
+
+    border: 1px solid #d9dee5;
+    border-radius: 8px;
+
+    box-shadow: 0 1px 2px rgba(24, 33, 43, 0.04);
 }
 
 .panel h2 {
@@ -348,6 +355,26 @@ h1 {
     border-bottom: 1px solid #ddd;
 }
 
+.panel h3 {
+    margin: 22px 24px 10px;
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.panel p,
+.panel ul {
+    margin: 16px 24px;
+
+    line-height: 1.7;
+}
+
+.panel ul {
+    padding-left: 24px;
+}
+
+/* ==================== PANEL CODE ==================== */
+
 .panel pre {
     margin: 0;
 
@@ -358,13 +385,34 @@ h1 {
     overflow: auto;
 
     font-family: monospace;
+
     font-size: 14px;
+
     line-height: 1.5;
 
     background: #f8f8f8;
 
     white-space: pre-wrap;
+
     overflow-wrap: break-word;
+}
+
+.panel code {
+    padding: 2px 5px;
+
+    font-family: monospace;
+
+    font-size: 0.95em;
+
+    background: #f0f0f0;
+
+    border-radius: 4px;
+}
+
+.panel pre code {
+    padding: 0;
+
+    background: transparent;
 }
 
 /* ==================== OUTPUT ==================== */
@@ -389,37 +437,72 @@ h1 {
 
 /* ==================== MOBILE ==================== */
 
-@media (max-width: 700px) {
+@media (max-width: 860px) {
 
     body {
-        padding: 20px;
+        padding: 24px 20px 36px;
     }
 
     .container {
         width: 100%;
     }
 
+    /* ---------- Editor ---------- */
+
     .editor {
         flex-direction: column;
     }
 
     .code-editor {
-        min-height: 200px;
+        width: 100%;
+        height: clamp(220px, 42vh, 280px);
+        min-height: 220px;
+    }
+
+    /* ---------- Buttons ---------- */
+
+    .editor-buttons {
+        flex-direction: row;
+
         width: 100%;
     }
 
     #run,
     #step {
-        width: 100%;
+        flex: 1;
     }
+
+    /* ---------- Debug panels ---------- */
 
     .debug-panels {
         grid-template-columns: 1fr;
     }
 
+    /* ---------- History ---------- */
+
     #prevButton,
+    #nextButton,
     #recentButton,
     #deleteHis {
         margin-bottom: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 20px 16px 28px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .history-buttons > * {
+        flex: 1 1 calc(50% - 8px);
+    }
+
+    .code-editor {
+        height: 220px;
     }
 }

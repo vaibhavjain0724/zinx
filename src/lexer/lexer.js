@@ -10,6 +10,7 @@ function lexer(code) {
     syntax.set("-", "MINUS");
     syntax.set("*", "MULTIPLY");
     syntax.set("/", "DIVIDE");
+    syntax.set(">", "GREATER");
     syntax.set("set" , "SET");
     let i = 0;
     const size = code.length;
@@ -43,6 +44,16 @@ function lexer(code) {
             tokens.push({
                 type: "RIGHT_PAREN",
                 value: ")"
+            });
+
+            i++;
+            continue;
+        }
+
+        if (syntax.has(code[i])) {
+            tokens.push({
+                type: syntax.get(code[i]),
+                value: code[i]
             });
 
             i++;

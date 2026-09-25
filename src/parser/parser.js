@@ -14,160 +14,166 @@ function parser(tokens) {
         const token = peek();
 
         if (!token) {
-            throw new Error(
-                `Expected ${type}, but reached end of input`
-            );
+            throw new Error(`Expected ${type}, but reached end of input`);
         }
 
         if (token.type !== type) {
-            throw new Error(
-                `Expected ${type}, got ${token.type}`
-            );
+            throw new Error(`Expected ${type}, got ${token.type}`);
         }
 
         return consume();
     }
 
-    function parseInteger() {
-        const token = expect("INTEGER");
+    function is(type) {
+        return peek() && peek().type === type;
+    }
 
+    function parseInteger() {
         return {
             type: "IntegerLiteral",
-            value: token.value
+            value: expect("INTEGER").value
         };
     }
 
     function parseBoolean() {
-        const token = consume();
-
         return {
             type: "BooleanLiteral",
-            value: token.type === "TRUE"
+            value: consume().type === "TRUE"
         };
     }
 
     function parseIdentifier() {
-        const token = expect("IDENTIFIER");
-
         return {
             type: "Identifier",
-            name: token.value
+            name: expect("IDENTIFIER").value
         };
     }
 
-    function parseExpression() {
-
-        if (peek().type === "INTEGER") {
+    function parsePrimary() {
+        if (is("INTEGER")) {
             return parseInteger();
         }
 
-        if (peek().type === "TRUE" || peek().type === "FALSE") {
+        if (is("TRUE") || is("FALSE")) {
             return parseBoolean();
         }
 
-        if (peek().type === "IDENTIFIER") {
+        if (is("IDENTIFIER")) {
             return parseIdentifier();
         }
-        
 
-        if (peek().type === "LEFT_PAREN") {
-            return parseCompoundExpression();
+        if (is("LEFT_PAREN")) {
+            consume();
+            const expression = parseExpression();
+            expect("RIGHT_PAREN");
+            return expression;
         }
 
-        throw new Error(
-            `Unexpected token: ${peek().type}`
-        );
+        if (!peek()) {
+            throw new Error("Expected an expression, but reached end of input");
+        }
+
+        throw new Error(`Unexpected token: ${peek().type}`);
     }
 
-    function parseShow() {
+    function parseBinaryLevel(nextParser, operators) {
+        let expression = nextParser();
+
+        while (peek() && operators.includes(peek().type)) {
+            const operator = consume();
+            const right = nextParser();
+
+            expression = {
+                type: "BinaryExpression",
+                operator: operator.value,
+                left: expression,
+                right: right
+            };
+        }
+
+        return expression;
+    }
+
+    function parseMultiplication() {
+        return parseBinaryLevel(parsePrimary, ["MULTIPLY", "DIVIDE"]);
+    }
+
+    function parseAddition() {
+        return parseBinaryLevel(parseMultiplication, ["PLUS", "MINUS"]);
+    }
+
+    function parseComparison() {
+        return parseBinaryLevel(parseAddition, ["GREATER"]);
+    }
+
+    function parseExpression() {
+        return parseComparison();
+    }
+
+    function parseShow(parenthesized) {
         expect("SHOW");
 
-        const expression = parseExpression();
-
-        expect("RIGHT_PAREN");
-
-        return {
+        const statement = {
             type: "ShowStatement",
-            expression: expression
+            expression: parseExpression()
         };
+
+        if (parenthesized) {
+            expect("RIGHT_PAREN");
+        }
+
+        return statement;
     }
 
-    function parseVariableDeclaration() {
+    function parseVariableDeclaration(parenthesized) {
         expect("SET");
 
         const name = expect("IDENTIFIER");
-
-        const value = parseExpression();
-
-        expect("RIGHT_PAREN");
-
-        return {
+        const statement = {
             type: "VariableDeclaration",
             name: name.value,
-            value: value
+            value: parseExpression()
         };
-    }
 
-    function parseBinaryExpression() {
-        const operator = consume();
-
-        const left = parseExpression();
-        const right = parseExpression();
-
-        expect("RIGHT_PAREN");
-
-        return {
-            type: "BinaryExpression",
-            operator: operator.value,
-            left: left,
-            right: right
-        };
-    }
-
-    function parseCompoundExpression() {
-
-        expect("LEFT_PAREN");
-
-        const operator = peek();
-
-        if (operator.type === "SHOW") {
-            return parseShow();
+        if (parenthesized) {
+            expect("RIGHT_PAREN");
         }
 
-        if (operator.type === "SET") {
-            return parseVariableDeclaration();
-        }
-
-        if (
-            operator.type === "PLUS" ||
-            operator.type === "MINUS" ||
-            operator.type === "MULTIPLY" ||
-            operator.type === "DIVIDE"
-        ) {
-            return parseBinaryExpression();
-        }
-
-        throw new Error(
-            `Unknown operator: ${operator.value}`
-        );
-    }
-    
-
-    function parse() {
-
-        const statements = [];
-
-        while (current < tokens.length) {
-            statements.push(parseExpression());
-        }
-
-        return {
-            type: "Program",
-            statements: statements
-        };
+        return statement;
     }
 
-    return parse();
+    function parseStatement() {
+        if (is("SHOW")) {
+            return parseShow(false);
+        }
+
+        if (is("SET")) {
+            return parseVariableDeclaration(false);
+        }
+
+        if (is("LEFT_PAREN") && tokens[current + 1]?.type === "SHOW") {
+            consume();
+            return parseShow(true);
+        }
+
+        if (is("LEFT_PAREN") && tokens[current + 1]?.type === "SET") {
+            consume();
+            return parseVariableDeclaration(true);
+        }
+
+        return parseExpression();
+    }
+
+    const statements = [];
+
+    while (current < tokens.length) {
+        statements.push(parseStatement());
+    }
+
+    return {
+        type: "Program",
+        statements: statements
+    };
 }
 
 export { parser };

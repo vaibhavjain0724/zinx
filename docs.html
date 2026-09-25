@@ -30,8 +30,8 @@
             </p>
 
             <p>
-                Zinx uses parentheses
-                <code>( )</code> for expressions and statements.
+                Zinx uses familiar infix arithmetic and parentheses
+                <code>( )</code> for grouping expressions.
             </p>
         </div>
 
@@ -39,15 +39,15 @@
             <h2>Basic Syntax</h2>
 
             <p>
-                Zinx uses prefix notation. The operator or command
-                comes before its arguments.
+                Zinx uses infix notation: operators go between
+                their left and right values.
             </p>
 
-            <pre>(+ 5 10)</pre>
-
-            <p>is equivalent to:</p>
-
             <pre>5 + 10</pre>
+
+            <p>Parentheses can override the normal operator precedence.</p>
+
+            <pre>(5 + 10) * 2</pre>
         </div>
 
         <div class="panel">
@@ -57,7 +57,7 @@
                 Use <code>show</code> to display a value.
             </p>
 
-            <pre>(show 10)</pre>
+            <pre>show 10</pre>
 
             <p>Output:</p>
 
@@ -71,10 +71,10 @@
                 Zinx supports four basic arithmetic operations.
             </p>
 
-            <pre>(+ 5 10)</pre>
-            <pre>(- 10 5)</pre>
-            <pre>(* 5 2)</pre>
-            <pre>(/ 10 2)</pre>
+            <pre>5 + 10</pre>
+            <pre>10 - 5</pre>
+            <pre>5 * 2</pre>
+            <pre>10 / 2</pre>
 
             <p>
                 Arithmetic expressions return a value.
@@ -89,7 +89,7 @@
                 Expressions can be used inside other expressions.
             </p>
 
-            <pre>(+ 5 (* 2 3))</pre>
+            <pre>5 + (2 * 3)</pre>
 
             <p>Result:</p>
 
@@ -100,7 +100,7 @@
                 <code>show</code>.
             </p>
 
-            <pre>(show (+ 5 (* 2 3)))</pre>
+            <pre>show 5 + (2 * 3)</pre>
 
             <p>Output:</p>
 
@@ -108,18 +108,33 @@
         </div>
 
         <div class="panel">
+            <h2>Comparison</h2>
+
+            <p>
+                Use <code>&gt;</code> to check whether the left value is
+                greater than the right value. Comparisons return
+                <code>true</code> or <code>false</code>.
+            </p>
+
+            <pre>show 10 &gt; 5 + 2</pre>
+
+            <p>Output:</p>
+
+            <pre>true</pre>
+        </div>
+
+        <div class="panel">
             <h2>Variables</h2>
 
             <p>
                 Variables store values that can be used later
-                in the program.
             </p>
 
             <p>
                 Zinx uses <code>set</code> to create a variable.
             </p>
 
-            <pre>(set x 5)</pre>
+            <pre>set x 5</pre>
 
             <p>
                 This creates a variable named <code>x</code>
@@ -132,8 +147,8 @@
                 Use the variable name with <code>show</code>.
             </p>
 
-            <pre>(set x 5)
-(show x)</pre>
+            <pre>set x 5
+show x</pre>
 
             <p>Output:</p>
 
@@ -145,8 +160,8 @@
                 Variables can be used inside arithmetic expressions.
             </p>
 
-            <pre>(set x 5)
-(show (+ x 10))</pre>
+            <pre>set x 5
+show x + 10</pre>
 
             <p>Output:</p>
 
@@ -159,9 +174,9 @@
                 variable name updates its value.
             </p>
 
-            <pre>(set x 5)
-(set x 20)
-(show x)</pre>
+            <pre>set x 5
+set x 20
+show x</pre>
 
             <p>Output:</p>
 
@@ -169,9 +184,9 @@
 
             <h3>Multiple Variables</h3>
 
-            <pre>(set x 5)
-(set y 10)
-(show (+ x y))</pre>
+            <pre>set x 5
+set y 10
+show x + y</pre>
 
             <p>Output:</p>
 
@@ -186,9 +201,9 @@
                 Each statement is written separately.
             </p>
 
-            <pre>(set x 10)
-(show x)
-(show (+ x 5))</pre>
+            <pre>set x 10
+show x
+show x + 5</pre>
 
             <p>Output:</p>
 
@@ -207,7 +222,7 @@
                 Division by zero is a runtime error in Zinx.
             </p>
 
-            <pre>(/ 10 0)</pre>
+            <pre>show 10 / 0</pre>
         </div>
 
         <div class="panel">
@@ -218,7 +233,7 @@
                 produces an error.
             </p>
 
-            <pre>(show y)</pre>
+            <pre>show y</pre>
 
             <p>Example error:</p>
 

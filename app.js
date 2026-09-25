@@ -11,6 +11,12 @@ const tokensElement = document.getElementById("tokens");
 const astElement = document.getElementById("ast");
 const highlightedCode = document.getElementById("highlightedCode");
 
+
+codeElement.addEventListener("scroll", () => {
+    highlightedCode.scrollTop = codeElement.scrollTop;
+    highlightedCode.scrollLeft = codeElement.scrollLeft;
+});
+
 function escapeHTML(text) {
     return text
         .replaceAll("&", "&amp;")
@@ -51,6 +57,7 @@ function highlightCode(code) {
             case "MINUS":
             case "MULTIPLY":
             case "DIVIDE":
+            case "GREATER":
                 result += `<span class="operator">${escapeHTML(value)}</span>`;
                 break;
 
@@ -143,6 +150,7 @@ codeElement.addEventListener("keydown", (e) => {
 
         codeElement.selectionStart = start + 4;
         codeElement.selectionEnd = start + 4;
+        updateHighlight();
 
 
     }
@@ -181,12 +189,14 @@ const nextButton = document.getElementById("nextButton");
 prevButton.addEventListener("click", () => {
     const code = previousHis();
     codeElement.value = code;
+    updateHighlight();
     runCode(code);
 })
 
 recentButton.addEventListener("click", () => {
     const code = mostRecentHis();
     codeElement.value = code;
+    updateHighlight();
     runCode(code);
 })
 
@@ -255,6 +265,4 @@ function runCode(code) {
         console.log(error);
     }
 }
-
-
 

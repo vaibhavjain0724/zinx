@@ -99,6 +99,10 @@ function interpret(node) {
             return left / right;
         }
 
+        if (node.operator === ">") {
+            return left > right;
+        }
+
         throw new Error(
             `Unknown operator: ${node.operator}`
         );
