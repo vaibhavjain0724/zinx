@@ -42,6 +42,13 @@ function parser(tokens) {
         };
     }
 
+    function parseString() {
+        return {
+            type: "StringLiteral",
+            value: expect("STRING").value
+        };
+    }
+
     function parseIdentifier() {
         return {
             type: "Identifier",
@@ -56,6 +63,10 @@ function parser(tokens) {
 
         if (is("TRUE") || is("FALSE")) {
             return parseBoolean();
+        }
+
+        if (is("STRING")) {
+            return parseString();
         }
 
         if (is("IDENTIFIER")) {
@@ -103,7 +114,14 @@ function parser(tokens) {
     }
 
     function parseComparison() {
-        return parseBinaryLevel(parseAddition, ["GREATER"]);
+        return parseBinaryLevel(parseAddition, [
+            "EQUAL",
+            "NOT_EQUAL",
+            "GREATER",
+            "LESS",
+            "GREATER_EQUAL",
+            "LESS_EQUAL"
+        ]);
     }
 
     function parseExpression() {

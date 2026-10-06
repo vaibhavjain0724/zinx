@@ -44,6 +44,10 @@ function interpret(node) {
         return node.value;
     }
 
+    if (node.type === "StringLiteral") {
+        return node.value;
+    }
+
     if (node.type === "Identifier") {
 
         if (!(node.name in variables)) {
@@ -78,6 +82,17 @@ function interpret(node) {
         const left = interpret(node.left);
         const right = interpret(node.right);
 
+        const arithmeticOperators = ["+", "-", "*", "/"];
+
+        if (
+            arithmeticOperators.includes(node.operator) &&
+            (typeof left !== "number" || typeof right !== "number")
+        ) {
+            throw new Error(
+                `Operator ${node.operator} requires integer operands`
+            );
+        }
+
         if (node.operator === "+") {
             return left + right;
         }
@@ -99,8 +114,37 @@ function interpret(node) {
             return left / right;
         }
 
+        if (node.operator === "==") {
+            return left === right;
+        }
+
+        if (node.operator === "!=") {
+            return left !== right;
+        }
+
+        if (
+            [">", "<", ">=", "<="].includes(node.operator) &&
+            (typeof left !== "number" || typeof right !== "number")
+        ) {
+            throw new Error(
+                `Operator ${node.operator} requires integer operands`
+            );
+        }
+
         if (node.operator === ">") {
             return left > right;
+        }
+
+        if (node.operator === "<") {
+            return left < right;
+        }
+
+        if (node.operator === ">=") {
+            return left >= right;
+        }
+
+        if (node.operator === "<=") {
+            return left <= right;
         }
 
         throw new Error(

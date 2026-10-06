@@ -34,7 +34,7 @@ function highlightCode(code) {
     for (const token of tokens) {
 
         // Find where this token appears in the original source
-        const value = String(token.value);
+        const value = token.raw || String(token.value);
         const index = code.indexOf(value, position);
 
         // Add everything before this token unchanged
@@ -53,11 +53,20 @@ function highlightCode(code) {
                 result += `<span class="boolean">${escapeHTML(value)}</span>`;
                 break;
 
+            case "STRING":
+                result += `<span class="string">${escapeHTML(value)}</span>`;
+                break;
+
             case "PLUS":
             case "MINUS":
             case "MULTIPLY":
             case "DIVIDE":
             case "GREATER":
+            case "LESS":
+            case "GREATER_EQUAL":
+            case "LESS_EQUAL":
+            case "EQUAL":
+            case "NOT_EQUAL":
                 result += `<span class="operator">${escapeHTML(value)}</span>`;
                 break;
 
@@ -120,7 +129,13 @@ function highlightCode(code) {
 // }
 
 function updateHighlight() {
-    highlightedCode.innerHTML = highlightCode(codeElement.value);
+    try {
+        highlightedCode.innerHTML = highlightCode(codeElement.value);
+    }
+    catch (error) {
+        // Keep the editor usable while a multi-character operator is incomplete.
+        highlightedCode.innerHTML = escapeHTML(codeElement.value);
+    }
 }
 codeElement.addEventListener("input", updateHighlight);
 
@@ -265,4 +280,3 @@ function runCode(code) {
         console.log(error);
     }
 }
-

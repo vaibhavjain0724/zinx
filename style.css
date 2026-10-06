@@ -275,6 +275,10 @@ h1 {
     color: #c2410c;
 }
 
+.string {
+    color: #b45309;
+}
+
 .operator {
     color: #15803d;
 }
@@ -423,6 +427,8 @@ h1 {
 
 .output-panel pre {
     min-height: 80px;
+    max-height: 260px;
+    overflow-y: auto;
 }
 
 /* ==================== TOKENS / AST ==================== */

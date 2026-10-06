@@ -111,16 +111,85 @@
             <h2>Comparison</h2>
 
             <p>
-                Use <code>&gt;</code> to check whether the left value is
-                greater than the right value. Comparisons return
+                Comparisons return
                 <code>true</code> or <code>false</code>.
             </p>
 
-            <pre>show 10 &gt; 5 + 2</pre>
+            <pre>show 5 == 5
+show 5 != 4
+show 5 &gt; 4
+show 5 &lt; 4
+show 5 &gt;= 5
+show 5 &lt;= 5</pre>
 
             <p>Output:</p>
 
-            <pre>true</pre>
+            <pre>true
+true
+true
+false
+true
+true</pre>
+
+            <p>
+                Equality works with integers and booleans. Ordering comparisons
+                (<code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, and
+                <code>&lt;=</code>) require integers.
+            </p>
+
+            <pre>set enabled true
+show enabled == false</pre>
+
+            <p>Output:</p>
+
+            <pre>false</pre>
+        </div>
+
+        <div class="panel">
+            <h2>Booleans</h2>
+
+            <p>
+                Boolean values are <code>true</code> and <code>false</code>.
+                They can be displayed directly or stored in variables.
+            </p>
+
+            <pre>show true
+show false
+set active true
+show active</pre>
+
+            <p>Output:</p>
+
+            <pre>true
+false
+true</pre>
+        </div>
+
+        <div class="panel">
+            <h2>Strings</h2>
+
+            <p>
+                Strings use double quotes. They can be displayed, stored in
+                variables, and compared with <code>==</code> or <code>!=</code>.
+            </p>
+
+            <pre>show "Hello, Zinx!"
+set greeting "Hello"
+show greeting
+show greeting == "Hello"</pre>
+
+            <p>Output:</p>
+
+            <pre>Hello, Zinx!
+Hello
+true</pre>
+
+            <p>
+                Use <code>\"</code> for a quote, <code>\\</code> for a
+                backslash, <code>\n</code> for a newline, and <code>\t</code>
+                for a tab. String concatenation and ordering comparisons are
+                not implemented yet.
+            </p>
         </div>
 
         <div class="panel">
@@ -286,15 +355,16 @@ Zinx Source Code
                 <li>Variable reassignment</li>
                 <li>Variable lookup</li>
                 <li>Variables in arithmetic expressions</li>
+                <li>Comments using <code>//</code></li>
+                <li>Booleans</li>
+                <li>Comparators: ==, !=, &gt;, &lt;, &gt;=, &lt;=</li>
+                <li>Strings</li>
                 <li>Step-by-step execution</li>
             </ul>
 
             <p>Coming next:</p>
 
             <ul>
-                <li>Strings</li>
-                <li>Booleans</li>
-                <li>Comparisons</li>
                 <li>Conditionals</li>
                 <li>Loops</li>
                 <li>Functions</li>
