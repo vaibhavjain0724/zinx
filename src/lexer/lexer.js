@@ -3,6 +3,8 @@ function lexer(code) {
     const keywords = new Map([
         ["show", "SHOW"],
         ["set", "SET"],
+        ["if", "IF"],
+        ["else", "ELSE"],
         ["true", "TRUE"],
         ["false", "FALSE"]
     ]);

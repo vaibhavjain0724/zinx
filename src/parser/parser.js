@@ -160,7 +160,35 @@ function parser(tokens) {
         return statement;
     }
 
+    function parseIfStatement() {
+        expect("IF");
+        expect("LEFT_PAREN");
+
+        const test = parseExpression();
+
+        expect("RIGHT_PAREN");
+
+        const consequent = parseStatement();
+        let alternate = null;
+
+        if (is("ELSE")) {
+            consume();
+            alternate = parseStatement();
+        }
+
+        return {
+            type: "IfStatement",
+            test: test,
+            consequent: consequent,
+            alternate: alternate
+        };
+    }
+
     function parseStatement() {
+        if (is("IF")) {
+            return parseIfStatement();
+        }
+
         if (is("SHOW")) {
             return parseShow(false);
         }

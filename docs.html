@@ -166,6 +166,29 @@ true</pre>
         </div>
 
         <div class="panel">
+            <h2>Conditionals</h2>
+
+            <p>
+                Use <code>if</code> with a boolean expression to choose a
+                statement. Add <code>else</code> to run an alternative
+                statement when the condition is false.
+            </p>
+
+            <pre>set score 72
+if (score &gt;= 50) (show "Pass") else (show "Try again")</pre>
+
+            <p>Output:</p>
+
+            <pre>Pass</pre>
+
+            <p>
+                The condition must be a boolean. The parentheses around each
+                branch keep the branch statement clear in multi-statement
+                programs.
+            </p>
+        </div>
+
+        <div class="panel">
             <h2>Strings</h2>
 
             <p>
@@ -359,13 +382,13 @@ Zinx Source Code
                 <li>Booleans</li>
                 <li>Comparators: ==, !=, &gt;, &lt;, &gt;=, &lt;=</li>
                 <li>Strings</li>
+                <li>Conditionals using <code>if</code> and <code>else</code></li>
                 <li>Step-by-step execution</li>
             </ul>
 
             <p>Coming next:</p>
 
             <ul>
-                <li>Conditionals</li>
                 <li>Loops</li>
                 <li>Functions</li>
                 <li>Bytecode compiler</li>
