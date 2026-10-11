@@ -36,6 +36,25 @@ function interpret(node) {
         return;
     }
 
+    if (node.type === "IfStatement") {
+
+        const test = interpret(node.test);
+
+        if (typeof test !== "boolean") {
+            throw new Error("If condition must evaluate to a boolean");
+        }
+
+        if (test) {
+            return interpret(node.consequent);
+        }
+
+        if (node.alternate) {
+            return interpret(node.alternate);
+        }
+
+        return;
+    }
+
     if (node.type === "IntegerLiteral") {
         return node.value;
     }
@@ -157,12 +176,19 @@ function interpret(node) {
     );
 }
 
+function interpretAll(program) {
+    while (statement < program.statements.length) {
+        interpret(program);
+    }
+}
+
 function clearOutput() {
     outputArr.length = 0;
 }
 
 export {
     interpret,
+    interpretAll,
     outputArr,
     restart
 };

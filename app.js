@@ -1,6 +1,6 @@
 import { lexer } from "./src/lexer/lexer.js";
 import { parser } from "./src/parser/parser.js";
-import { interpret, outputArr, restart } from "./src/interpreter/interpreter.js";
+import { interpret, interpretAll, outputArr, restart } from "./src/interpreter/interpreter.js";
 
 import { updateHis, delHis, mostRecentHis, previousHis, nextHis } from "./src/history.js";
 
@@ -45,6 +45,8 @@ function highlightCode(code) {
 
             case "SHOW":
             case "SET":
+            case "IF":
+            case "ELSE":
                 result += `<span class="keyword">${escapeHTML(value)}</span>`;
                 break;
 
@@ -144,7 +146,7 @@ function executeCode() {
     const code = codeElement.value;
 
     restart();
-    runCode(code);
+    runCode(code, "run");
     updateHis(code);
 }
 
@@ -183,6 +185,12 @@ codeElement.addEventListener("keydown", (e) => {
 
 const stepButton = document.getElementById("step");
 stepButton.addEventListener("click", () => {
+    if (codeElement.value !== activeCode) {
+        restart();
+        runCode(codeElement.value, "step");
+        return;
+    }
+
     interpretUpd(currentAST);
 })
 
@@ -205,14 +213,16 @@ prevButton.addEventListener("click", () => {
     const code = previousHis();
     codeElement.value = code;
     updateHighlight();
-    runCode(code);
+    restart();
+    runCode(code, "run");
 })
 
 recentButton.addEventListener("click", () => {
     const code = mostRecentHis();
     codeElement.value = code;
     updateHighlight();
-    runCode(code);
+    restart();
+    runCode(code, "run");
 })
 
 deleteHis.addEventListener("click", () => {
@@ -222,13 +232,21 @@ deleteHis.addEventListener("click", () => {
 nextButton.addEventListener("click", () => {
     const code = nextHis();
     codeElement.value = code;
-    runCode(code);
+    updateHighlight();
+    restart();
+    runCode(code, "run");
 })
 
 let currentAST;
+let activeCode = null;
 
 function interpretUpd(ast) {
     interpret(ast);
+    updateOutput(output, outputArr);
+}
+
+function interpretAllUpd(ast) {
+    interpretAll(ast);
     updateOutput(output, outputArr);
 }
 
@@ -259,18 +277,23 @@ function interpretUpd(ast) {
 
 // }
 
-function runCode(code) {
+function runCode(code, mode = "run") {
 
     try {
         const tokens = lexer(code);
         console.log(tokens);
 
         currentAST = parser(tokens);
+        activeCode = code;
 
         update(tokensElement, tokens);
         update(astElement, currentAST);
 
-        interpretUpd(currentAST);
+        if (mode === "step") {
+            interpretUpd(currentAST);
+        } else {
+            interpretAllUpd(currentAST);
+        }
 
         console.log(currentAST);
 
