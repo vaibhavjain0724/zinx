@@ -9,7 +9,13 @@
 <body class="docs-page">
     <header class="docs-header">
         <a class="docs-brand" href="./docs.html" aria-label="Zinx documentation home">Zinx <span>Docs</span></a>
-        <a href="./index.html" class="docs-back">Open playground <span aria-hidden="true">→</span></a>
+        <div class="docs-header-actions">
+            <button class="theme-toggle" type="button" aria-pressed="false">
+                <span class="theme-toggle-icon" aria-hidden="true">◐</span>
+                <span class="theme-toggle-label">Dark mode</span>
+            </button>
+            <a href="./index.html" class="docs-back">Open playground <span aria-hidden="true">→</span></a>
+        </div>
     </header>
 
     <div class="docs-layout">
@@ -120,5 +126,6 @@ show message</code></pre><div class="docs-result"><span>Output</span><code>Ready
             </section>
         </main>
     </div>
+    <script src="./theme.js"></script>
 </body>
 </html>

@@ -593,3 +593,189 @@ h1 {
     .docs-callout { display: block; }
     .docs-callout strong { display: block; margin-bottom: 4px; }
 }
+
+/* ==================== PLAYGROUND PAGE ==================== */
+
+.app-page { max-width: none; min-height: 100vh; margin: 0; padding: 0; background: #f8f8fa; color: #24252b; }
+.app-header { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 max(28px, calc((100vw - 1240px) / 2)); border-bottom: 1px solid #e6e6eb; background: rgba(248, 248, 250, .93); backdrop-filter: blur(12px); }
+.app-brand, .app-docs-link { text-decoration: none; }
+.app-brand { color: #1c1d22; font-size: 18px; font-weight: 750; letter-spacing: -.035em; }
+.app-brand span { color: #72727e; font-weight: 500; }
+.app-header-actions { display: flex; align-items: center; gap: 20px; }
+.app-docs-link { color: #4f46e5; font-size: 14px; font-weight: 650; }
+.app-docs-link span { margin-left: 4px; }
+.theme-toggle { display: inline-flex; align-items: center; gap: 6px; padding: 6px 8px; border: 0; border-radius: 6px; background: transparent; color: #686873; cursor: pointer; font-size: 13px; font-weight: 650; }
+.theme-toggle:hover { background: #eeeeF3; color: #41414a; }
+.theme-toggle-icon { color: #6366f1; font-size: 16px; line-height: 1; }
+.app-shell { max-width: 1180px; margin: 0 auto; padding: 54px 28px 88px; }
+.app-intro { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 36px; }
+.app-kicker, .app-section-eyebrow { margin: 0 0 7px; color: #6366f1; font-size: 11px; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+.app-intro h1 { margin: 0 0 12px; color: #1c1d22; font-size: clamp(34px, 4.5vw, 47px); line-height: 1.05; letter-spacing: -.045em; }
+.app-intro > div > p:last-child { max-width: 620px; margin: 0; color: #686873; font-size: 16px; line-height: 1.7; }
+.app-shortcut { display: flex; flex: none; align-items: center; gap: 5px; color: #868691; font-size: 12px; white-space: nowrap; }
+.app-shortcut kbd { min-width: 23px; padding: 3px 5px; border: 1px solid #d9d9e0; border-bottom-width: 2px; border-radius: 5px; background: #fff; color: #61616d; font: 600 12px/1 Arial, sans-serif; text-align: center; }
+.app-shortcut span { margin-left: 3px; }
+.app-history { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 24px; padding: 17px 20px; border: 1px solid #e4e4e9; border-radius: 10px; background: #fff; box-shadow: 0 1px 2px rgba(30, 30, 40, .03); }
+.app-history-heading { display: flex; align-items: baseline; gap: 12px; }
+.app-history-heading h2, .app-panel-heading h2, .app-inspect-heading h2 { margin: 0; color: #2d2e35; font-size: 17px; letter-spacing: -.015em; }
+.app-history-heading .app-section-eyebrow { margin: 0; }
+.app-history-heading > p { margin: 0; color: #888893; font-size: 13px; }
+.app-page .history-buttons { justify-content: flex-end; gap: 7px; }
+.app-page #prevButton, .app-page #nextButton, .app-page #recentButton, .app-page #deleteHis { padding: 8px 10px; border: 1px solid #e1e1e7; border-radius: 6px; background: #fff; color: #5f5f6b; font-size: 12px; font-weight: 600; }
+.app-page #prevButton:hover, .app-page #nextButton:hover, .app-page #recentButton:hover { border-color: #cbc9f8; background: #f4f3ff; color: #4f46b5; }
+.app-page #deleteHis { color: #b0475c; border-color: #f0d9de; }
+.app-page #deleteHis:hover { background: #fff5f6; }
+.app-workspace { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, .72fr); gap: 20px; align-items: stretch; }
+.app-editor-panel, .app-page .panel { margin: 0; overflow: hidden; border: 1px solid #e2e2e8; border-radius: 10px; background: #fff; box-shadow: 0 2px 5px rgba(30, 30, 40, .04); }
+.app-panel-heading { display: flex; align-items: center; justify-content: space-between; min-height: 70px; padding: 15px 18px; border-bottom: 1px solid #e8e8ed; }
+.app-panel-heading .app-section-eyebrow { margin-bottom: 5px; }
+.app-editor-hint { color: #9999a3; font-size: 12px; }
+.app-page .editor { display: flex; gap: 0; margin: 0; }
+.app-page .code-editor { height: 370px; border: 0; border-radius: 0; box-shadow: none; }
+.app-page .code-editor:focus-within { box-shadow: inset 3px 0 #6366f1; }
+.app-page #highlightedCode { background: #fff; }
+.app-page #highlightedCode, .app-page #code { padding: 20px; font-size: 14px; line-height: 1.7; }
+.app-page .editor-buttons { flex: none; align-self: stretch; gap: 0; width: 112px; padding: 14px; border-left: 1px solid #e8e8ed; background: #fbfbfc; }
+.app-page #run, .app-page #step { width: 100%; padding: 10px 8px; border: 0; border-radius: 6px; background: transparent; color: #5d5d68; font-size: 13px; font-weight: 700; text-align: left; }
+.app-page #run { margin-bottom: 5px; background: #4f46e5; color: #fff; text-align: center; box-shadow: 0 1px 3px rgba(79, 70, 229, .25); }
+.app-page #run:hover { background: #4338ca; }
+.app-page #step:hover { background: #f0f0f4; color: #373743; }
+.app-page .output-panel { display: flex; flex-direction: column; }
+.app-status-dot { display: inline-flex; align-items: center; gap: 6px; color: #7b7b86; font-size: 12px; }
+.app-status-dot::before { width: 7px; height: 7px; border-radius: 50%; background: #8dd9a0; content: ""; }
+.app-page .output-panel pre { flex: 1; min-height: 300px; max-height: none; padding: 20px; background: #20212a; color: #d7f8df; font: 14px/1.7 "SFMono-Regular", Consolas, monospace; }
+.app-inspect { margin-top: 46px; }
+.app-inspect-reminder { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 13px; margin-top: 20px; padding: 15px 17px; border: 1px solid #dedcff; border-radius: 9px; background: #f4f3ff; color: #5b5a72; font-size: 14px; line-height: 1.5; text-decoration: none; }
+.app-inspect-reminder:hover { border-color: #bbb7fb; background: #efeeff; }
+.app-inspect-reminder strong { color: #48449b; }
+.app-inspect-reminder-icon { display: grid; width: 27px; height: 27px; place-items: center; border-radius: 6px; background: #e3e1ff; color: #5b55c8; font-weight: 700; }
+.app-inspect-reminder-arrow { color: #5b55c8; font-size: 18px; }
+.app-inspect-heading { margin-bottom: 18px; }
+.app-inspect-heading h2 { margin-bottom: 7px; font-size: 22px; }
+.app-inspect-heading > p:last-child { margin: 0; color: #777782; font-size: 14px; line-height: 1.6; }
+.app-page .debug-panels { gap: 20px; }
+.app-page .debug-panels .panel h2 { padding: 14px 18px; border-bottom-color: #e8e8ed; color: #3b3b45; font-size: 14px; }
+.app-page .debug-panels .panel pre { min-height: 180px; padding: 18px; background: #f6f6f8; color: #585864; font: 12px/1.55 "SFMono-Regular", Consolas, monospace; }
+
+/* ---------- Playground dark mode ---------- */
+
+.app-page.dark-mode { background: #18191f; color: #e7e7ed; }
+.dark-mode .app-header { border-bottom-color: #30313a; background: rgba(24, 25, 31, .93); }
+.dark-mode .app-brand { color: #f2f2f5; }
+.dark-mode .app-brand span { color: #a9a9b4; }
+.dark-mode .app-docs-link { color: #a8a3ff; }
+.dark-mode .theme-toggle { color: #aaaab5; }
+.dark-mode .theme-toggle:hover { background: #292a33; color: #ededf3; }
+.dark-mode .theme-toggle-icon { color: #c1bdff; }
+.dark-mode .app-intro h1 { color: #f0f0f4; }
+.dark-mode .app-intro > div > p:last-child, .dark-mode .app-history-heading > p, .dark-mode .app-inspect-heading > p:last-child { color: #aaaab5; }
+.dark-mode .app-shortcut { color: #aaaab5; }
+.dark-mode .app-shortcut kbd { border-color: #444550; background: #25262e; color: #c9c9d1; }
+.dark-mode .app-history, .dark-mode .app-editor-panel, .dark-mode .app-page .panel { border-color: #34353f; background: #22232b; box-shadow: none; }
+.dark-mode .app-history-heading h2, .dark-mode .app-panel-heading h2, .dark-mode .app-inspect-heading h2 { color: #e8e8ed; }
+.dark-mode .app-page #prevButton, .dark-mode .app-page #nextButton, .dark-mode .app-page #recentButton, .dark-mode .app-page #deleteHis { border-color: #41424c; background: #292a33; color: #c3c3cc; }
+.dark-mode .app-page #prevButton:hover, .dark-mode .app-page #nextButton:hover, .dark-mode .app-page #recentButton:hover { border-color: #625eae; background: #302e4c; color: #dfdcff; }
+.dark-mode .app-page #deleteHis { color: #f0a1b1; border-color: #613f49; }
+.dark-mode .app-panel-heading { border-bottom-color: #34353f; }
+.dark-mode .app-editor-hint, .dark-mode .app-status-dot { color: #9b9ba8; }
+.dark-mode .app-page .code-editor, .dark-mode .app-page #highlightedCode { background: #1d1e25; }
+.dark-mode .app-page .code-editor:focus-within { box-shadow: inset 3px 0 #8983ff; }
+.dark-mode .app-page #code { caret-color: #f1f1f4; }
+.dark-mode .app-page #code::placeholder { color: #767684; }
+.dark-mode .app-page .editor-buttons { border-left-color: #34353f; background: #25262e; }
+.dark-mode .app-page #step { color: #c2c2cb; }
+.dark-mode .app-page #step:hover { background: #34353f; color: #fff; }
+.dark-mode .app-page .output-panel pre { background: #16171d; color: #c5f5d1; }
+.dark-mode .app-inspect-reminder { border-color: #454174; background: #292741; color: #c6c4d9; }
+.dark-mode .app-inspect-reminder:hover { border-color: #6863ad; background: #302e4c; }
+.dark-mode .app-inspect-reminder strong { color: #d1ceff; }
+.dark-mode .app-inspect-reminder-icon { background: #3a3763; color: #cbc8ff; }
+.dark-mode .app-inspect-reminder-arrow { color: #cbc8ff; }
+.dark-mode .app-page .debug-panels .panel h2 { border-bottom-color: #34353f; color: #dddde5; }
+.dark-mode .app-page .debug-panels .panel pre { background: #1b1c23; color: #c4c4ce; }
+.dark-mode .keyword { color: #b7a5ff; }
+.dark-mode .boolean { color: #f6a86b; }
+.dark-mode .string { color: #f5c56d; }
+.dark-mode .operator { color: #7cdaa3; }
+.dark-mode .number { color: #82b5ff; }
+.dark-mode .bracket { color: #b7b7c1; }
+
+@media (max-width: 860px) {
+    .app-header { padding: 0 20px; }
+    .app-shell { padding: 40px 20px 64px; }
+    .app-history { display: block; }
+    .app-history-heading { justify-content: space-between; margin-bottom: 14px; }
+    .app-workspace { grid-template-columns: 1fr; }
+    .app-page .output-panel pre { min-height: 180px; }
+}
+
+@media (max-width: 560px) {
+    .app-header { height: 58px; padding: 0 16px; }
+    .app-brand { font-size: 16px; }
+    .app-header-actions { gap: 10px; }
+    .theme-toggle { padding: 6px; }
+    .theme-toggle-label { display: none; }
+    .app-shell { padding: 32px 16px 50px; }
+    .app-intro { display: block; margin-bottom: 28px; }
+    .app-intro h1 { font-size: 35px; }
+    .app-shortcut { margin-top: 17px; }
+    .app-history { padding: 15px; }
+    .app-history-heading { display: block; }
+    .app-history-heading > p { margin-top: 6px; }
+    .app-page .history-buttons { justify-content: stretch; }
+    .app-page #prevButton, .app-page #nextButton, .app-page #recentButton, .app-page #deleteHis { flex: 1 1 calc(50% - 7px); }
+    .app-page .code-editor { height: 310px; }
+    .app-page .editor { flex-direction: column; }
+    .app-page .editor-buttons { flex-direction: row; align-self: auto; width: 100%; padding: 10px; border-top: 1px solid #e8e8ed; border-left: 0; }
+    .app-page #run, .app-page #step { flex: 1; margin: 0; text-align: center; }
+    .app-page .output-panel pre { min-height: 160px; }
+    .app-inspect-reminder { align-items: start; font-size: 13px; }
+}
+
+/* ==================== SHARED THEME + PLAYGROUND DISCOVERY ==================== */
+
+.docs-header-actions { display: flex; align-items: center; gap: 20px; }
+.app-top-insight { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 11px; flex: none; width: 290px; padding: 13px 14px; border: 1px solid #dedcff; border-radius: 9px; background: #f4f3ff; color: #5b5a72; text-decoration: none; }
+.app-top-insight:hover { border-color: #bbb7fb; background: #efeeff; }
+.app-top-insight-icon { display: grid; width: 27px; height: 27px; place-items: center; border-radius: 6px; background: #e3e1ff; color: #5b55c8; font-weight: 700; }
+.app-top-insight strong, .app-top-insight small { display: block; }
+.app-top-insight strong { color: #48449b; font-size: 13px; }
+.app-top-insight small { margin-top: 2px; color: #6c6a83; font-size: 11px; line-height: 1.4; }
+.app-top-insight-arrow { color: #5b55c8; font-size: 18px; }
+
+.docs-page.dark-mode { background: #18191f; color: #e6e6ec; }
+.dark-mode .docs-header { border-bottom-color: #30313a; background: rgba(24, 25, 31, .93); }
+.dark-mode .docs-brand { color: #f0f0f4; }
+.dark-mode .docs-brand span { color: #aaaab5; }
+.dark-mode .docs-back { color: #aaa6ff; }
+.dark-mode .docs-nav-label { color: #858591; }
+.dark-mode .docs-nav a { color: #aaaab5; }
+.dark-mode .docs-nav a:hover { color: #d2d0ff; background: #302e4c; }
+.dark-mode .docs-hero, .dark-mode .docs-section { border-bottom-color: #30313a; }
+.dark-mode .docs-hero h1, .dark-mode .docs-section-heading h2 { color: #efeff3; }
+.dark-mode .docs-hero > p:not(.docs-kicker), .dark-mode .docs-section-heading div > p, .dark-mode .docs-section > p { color: #aaaab5; }
+.dark-mode .docs-secondary-action { border-color: #41424c; background: #26272f; color: #d1d1da; }
+.dark-mode .docs-secondary-action:hover { background: #30313a; }
+.dark-mode .docs-section code { background: #30313a; color: #dedee7; }
+.dark-mode .docs-table-wrap { border-color: #3a3b45; }
+.dark-mode .docs-table th, .dark-mode .docs-table td { border-bottom-color: #3a3b45; }
+.dark-mode .docs-table th { background: #282930; color: #c8c8d1; }
+.dark-mode .docs-table td { color: #aaaab5; }
+.dark-mode .docs-table td:first-child { color: #e4e4ea; }
+.dark-mode .docs-callout { border-color: #454174; background: #292741; color: #c6c4d9; }
+.dark-mode .docs-callout strong { color: #d1ceff; }
+.dark-mode .docs-error-grid > div, .dark-mode .docs-status-grid > div { border-color: #3a3b45; background: #22232b; }
+.dark-mode .docs-error-grid h3, .dark-mode .docs-status-grid h3 { color: #e0e0e7; }
+.dark-mode .docs-error-grid pre { background: #1b1c23; }
+.dark-mode .docs-error-grid p, .dark-mode .docs-checklist, .dark-mode .docs-status-grid ul { color: #aaaab5; }
+.dark-mode .app-top-insight { border-color: #454174; background: #292741; color: #c6c4d9; }
+.dark-mode .app-top-insight:hover { border-color: #6863ad; background: #302e4c; }
+.dark-mode .app-top-insight-icon { background: #3a3763; color: #cbc8ff; }
+.dark-mode .app-top-insight strong { color: #d1ceff; }
+.dark-mode .app-top-insight small { color: #c6c4d9; }
+.dark-mode .app-top-insight-arrow { color: #cbc8ff; }
+
+@media (max-width: 560px) {
+    .docs-header-actions { gap: 10px; }
+    .app-top-insight { width: 100%; margin-top: 18px; }
+}

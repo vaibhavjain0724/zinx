@@ -1,84 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zinx</title>
-
+    <title>Zinx Playground</title>
     <link rel="stylesheet" href="./style.css">
 </head>
-
-<body>
-
-    <h1>Zinx</h1>
-
-    <div class="toolbar-section">
-        <h2>History</h2>
-
-        <div class="history-buttons">
-            <button id="prevButton">Previous</button>
-            <button id="nextButton">Next</button>
-            <button id="recentButton">Most Recent Code</button>
-            <button id="deleteHis">Clear History</button>
+<body class="app-page">
+    <header class="app-header">
+        <a class="app-brand" href="./index.html" aria-label="Zinx playground home">Zinx <span>Playground</span></a>
+        <div class="app-header-actions">
+            <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false">
+                <span class="theme-toggle-icon" aria-hidden="true">◐</span>
+                <span class="theme-toggle-label">Dark mode</span>
+            </button>
+            <a href="./docs.html" class="app-docs-link">Documentation <span aria-hidden="true">↗</span></a>
         </div>
-    </div>
+    </header>
 
-    <div class="toolbar-section documentation-section">
-        <h2>Documentation</h2>
+    <main class="app-shell">
+        <section class="app-intro">
+            <div>
+                <p class="app-kicker">Interactive interpreter</p>
+                <h1>Build, inspect, and run Zinx.</h1>
+                <p>Write a program, run it in full or step through each statement, then inspect the tokens and syntax tree it produces.</p>
+            </div>
+            <a class="app-top-insight" href="#inspect-title">
+                <span class="app-top-insight-icon" aria-hidden="true">⌘</span>
+                <span><strong>See inside your code</strong><small>Run your program to reveal its Tokens and AST.</small></span>
+                <span class="app-top-insight-arrow" aria-hidden="true">↓</span>
+            </a>
+        </section>
 
-        <a href="./docs.html" class="docs-link">
-            Documentation
-        </a>
-    </div>
-    <!-- <div class="editor">
-        <textarea id="code" placeholder="Enter Zinx code"></textarea>
+        <section class="app-history" aria-labelledby="history-title">
+            <div class="app-history-heading">
+                <div>
+                    <p class="app-section-eyebrow">Workspace</p>
+                    <h2 id="history-title">History</h2>
+                </div>
+                <p>Your previous programs are saved in this browser.</p>
+            </div>
+            <div class="history-buttons">
+                <button id="prevButton">← Previous</button>
+                <button id="nextButton">Next →</button>
+                <button id="recentButton">Most recent</button>
+                <button id="deleteHis">Clear history</button>
+            </div>
+        </section>
 
-        <div class="editor-buttons">
-            <button id="run">Run</button>
-            <button id="step">Step</button>
+        <div class="app-workspace">
+            <section class="app-editor-panel" aria-labelledby="editor-title">
+                <div class="app-panel-heading">
+                    <div>
+                        <p class="app-section-eyebrow">Source</p>
+                        <h2 id="editor-title">Code editor</h2>
+                    </div>
+                    <span class="app-editor-hint">Tab inserts spaces</span>
+                </div>
+                <div class="editor">
+                    <div class="code-editor">
+                        <pre id="highlightedCode" aria-hidden="true"></pre>
+                        <textarea id="code" spellcheck="false" placeholder="Write Zinx code here..."></textarea>
+                    </div>
+                    <div class="editor-buttons">
+                        <button id="run">Run <span aria-hidden="true">→</span></button>
+                        <button id="step">Step</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel output-panel" aria-labelledby="output-title">
+                <div class="app-panel-heading">
+                    <div>
+                        <p class="app-section-eyebrow">Program result</p>
+                        <h2 id="output-title">Output</h2>
+                    </div>
+                    <span class="app-status-dot">Ready</span>
+                </div>
+                <pre id="output" aria-live="polite"></pre>
+            </section>
         </div>
-    </div> -->
-    <div class="editor">
 
-        <div class="code-editor">
+        <section class="app-inspect" aria-labelledby="inspect-title">
+            <div class="app-inspect-heading">
+                <p class="app-section-eyebrow">Under the hood</p>
+                <h2 id="inspect-title">Inspect the program</h2>
+                <p>See how Zinx converts your source code into tokens and an abstract syntax tree.</p>
+            </div>
+            <div class="debug-panels">
+                <div class="panel">
+                    <h2>Tokens</h2>
+                    <pre id="tokens"></pre>
+                </div>
+                <div class="panel">
+                    <h2>AST</h2>
+                    <pre id="ast"></pre>
+                </div>
+            </div>
+        </section>
+    </main>
 
-            <pre id="highlightedCode"></pre>
-
-            <textarea id="code" spellcheck="false" placeholder="Enter Zinx code"></textarea>
-
-        </div>
-
-        <div class="editor-buttons">
-            <button id="run">Run</button>
-            <button id="step">Step</button>
-        </div>
-
-    </div>
-
-    <div class="panel output-panel">
-        <h2>Output</h2>
-        <pre id="output"></pre>
-    </div>
-
-    <div class="debug-panels">
-
-        <div class="panel">
-            <h2>Tokens</h2>
-            <pre id="tokens"></pre>
-        </div>
-
-        <div class="panel">
-            <h2>AST</h2>
-            <pre id="ast"></pre>
-        </div>
-
-    </div>
-
-    </div>
-
+    <script src="./theme.js"></script>
     <script type="module" src="./app.js"></script>
-
 </body>
-
 </html>
