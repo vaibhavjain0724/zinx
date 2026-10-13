@@ -1,403 +1,124 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Zinx Documentation</title>
-
     <link rel="stylesheet" href="./style.css">
 </head>
-
-<body>
-
-    <div class="container">
-
-        <h1>Zinx Documentation</h1>
-
-        <a href="./index.html" class="docs-link">
-            ← Back to Zinx
-        </a>
-
-        <div class="panel">
-            <h2>What is Zinx?</h2>
-
-            <p>
-                Zinx is a small Lisp-inspired programming language
-                built in vanilla JavaScript.
-            </p>
-
-            <p>
-                Zinx uses familiar infix arithmetic and parentheses
-                <code>( )</code> for grouping expressions.
-            </p>
-        </div>
-
-        <div class="panel">
-            <h2>Basic Syntax</h2>
-
-            <p>
-                Zinx uses infix notation: operators go between
-                their left and right values.
-            </p>
-
-            <pre>5 + 10</pre>
-
-            <p>Parentheses can override the normal operator precedence.</p>
-
-            <pre>(5 + 10) * 2</pre>
-        </div>
-
-        <div class="panel">
-            <h2>Output</h2>
-
-            <p>
-                Use <code>show</code> to display a value.
-            </p>
-
-            <pre>show 10</pre>
-
-            <p>Output:</p>
-
-            <pre>10</pre>
-        </div>
-
-        <div class="panel">
-            <h2>Arithmetic</h2>
-
-            <p>
-                Zinx supports four basic arithmetic operations.
-            </p>
-
-            <pre>5 + 10</pre>
-            <pre>10 - 5</pre>
-            <pre>5 * 2</pre>
-            <pre>10 / 2</pre>
-
-            <p>
-                Arithmetic expressions return a value.
-                They do not produce visible output by themselves.
-            </p>
-        </div>
-
-        <div class="panel">
-            <h2>Nested Expressions</h2>
-
-            <p>
-                Expressions can be used inside other expressions.
-            </p>
-
-            <pre>5 + (2 * 3)</pre>
-
-            <p>Result:</p>
-
-            <pre>11</pre>
-
-            <p>
-                Nested expressions can also be passed to
-                <code>show</code>.
-            </p>
-
-            <pre>show 5 + (2 * 3)</pre>
-
-            <p>Output:</p>
-
-            <pre>11</pre>
-        </div>
-
-        <div class="panel">
-            <h2>Comparison</h2>
-
-            <p>
-                Comparisons return
-                <code>true</code> or <code>false</code>.
-            </p>
-
-            <pre>show 5 == 5
-show 5 != 4
-show 5 &gt; 4
-show 5 &lt; 4
-show 5 &gt;= 5
-show 5 &lt;= 5</pre>
-
-            <p>Output:</p>
-
-            <pre>true
-true
-true
-false
-true
-true</pre>
-
-            <p>
-                Equality works with integers and booleans. Ordering comparisons
-                (<code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, and
-                <code>&lt;=</code>) require integers.
-            </p>
-
-            <pre>set enabled true
-show enabled == false</pre>
-
-            <p>Output:</p>
-
-            <pre>false</pre>
-        </div>
-
-        <div class="panel">
-            <h2>Booleans</h2>
-
-            <p>
-                Boolean values are <code>true</code> and <code>false</code>.
-                They can be displayed directly or stored in variables.
-            </p>
-
-            <pre>show true
-show false
-set active true
-show active</pre>
-
-            <p>Output:</p>
-
-            <pre>true
-false
-true</pre>
-        </div>
-
-        <div class="panel">
-            <h2>Conditionals</h2>
-
-            <p>
-                Use <code>if</code> with a boolean expression to choose a
-                statement. Add <code>else</code> to run an alternative
-                statement when the condition is false.
-            </p>
-
-            <pre>set score 72
-if (score &gt;= 50) (show "Pass") else (show "Try again")</pre>
-
-            <p>Output:</p>
-
-            <pre>Pass</pre>
-
-            <p>
-                The condition must be a boolean. The parentheses around each
-                branch keep the branch statement clear in multi-statement
-                programs.
-            </p>
-        </div>
-
-        <div class="panel">
-            <h2>Strings</h2>
-
-            <p>
-                Strings use double quotes. They can be displayed, stored in
-                variables, and compared with <code>==</code> or <code>!=</code>.
-            </p>
-
-            <pre>show "Hello, Zinx!"
-set greeting "Hello"
-show greeting
-show greeting == "Hello"</pre>
-
-            <p>Output:</p>
-
-            <pre>Hello, Zinx!
-Hello
-true</pre>
-
-            <p>
-                Use <code>\"</code> for a quote, <code>\\</code> for a
-                backslash, <code>\n</code> for a newline, and <code>\t</code>
-                for a tab. String concatenation and ordering comparisons are
-                not implemented yet.
-            </p>
-        </div>
-
-        <div class="panel">
-            <h2>Variables</h2>
-
-            <p>
-                Variables store values that can be used later
-            </p>
-
-            <p>
-                Zinx uses <code>set</code> to create a variable.
-            </p>
-
-            <pre>set x 5</pre>
-
-            <p>
-                This creates a variable named <code>x</code>
-                and stores the value <code>5</code>.
-            </p>
-
-            <h3>Displaying a Variable</h3>
-
-            <p>
-                Use the variable name with <code>show</code>.
-            </p>
-
-            <pre>set x 5
-show x</pre>
-
-            <p>Output:</p>
-
-            <pre>5</pre>
-
-            <h3>Using Variables in Arithmetic</h3>
-
-            <p>
-                Variables can be used inside arithmetic expressions.
-            </p>
-
-            <pre>set x 5
-show x + 10</pre>
-
-            <p>Output:</p>
-
-            <pre>15</pre>
-
-            <h3>Changing a Variable</h3>
-
-            <p>
-                Calling <code>set</code> again with the same
-                variable name updates its value.
-            </p>
-
-            <pre>set x 5
-set x 20
-show x</pre>
-
-            <p>Output:</p>
-
-            <pre>20</pre>
-
-            <h3>Multiple Variables</h3>
-
-            <pre>set x 5
-set y 10
-show x + y</pre>
-
-            <p>Output:</p>
-
-            <pre>15</pre>
-        </div>
-
-        <div class="panel">
-            <h2>Multiple Statements</h2>
-
-            <p>
-                Zinx programs can contain multiple statements.
-                Each statement is written separately.
-            </p>
-
-            <pre>set x 10
-show x
-show x + 5</pre>
-
-            <p>Output:</p>
-
-            <pre>10
-15</pre>
-
-            <p>
-                Statements are executed in order.
-            </p>
-        </div>
-
-        <div class="panel">
-            <h2>Division by Zero</h2>
-
-            <p>
-                Division by zero is a runtime error in Zinx.
-            </p>
-
-            <pre>show 10 / 0</pre>
-        </div>
-
-        <div class="panel">
-            <h2>Undefined Variables</h2>
-
-            <p>
-                Using a variable that has not been defined
-                produces an error.
-            </p>
-
-            <pre>show y</pre>
-
-            <p>Example error:</p>
-
-            <pre>Undefined variable: y</pre>
-        </div>
-
-        <div class="panel">
-            <h2>How Zinx Works</h2>
-
-            <pre>
-Zinx Source Code
-       ↓
-     Lexer
-       ↓
-     Tokens
-       ↓
-     Parser
-       ↓
-      AST
-       ↓
-  Interpreter
-       ↓
-   Environment
-       ↓
-     Output
-            </pre>
-
-            <p>
-                The environment stores variables and their values
-                during program execution.
-            </p>
-        </div>
-
-        <div class="panel">
-            <h2>Current Version</h2>
-
-            <p>
-                Zinx V0.2 is currently under development.
-            </p>
-
-            <p>Currently implemented:</p>
-
-            <ul>
-                <li>Integers</li>
-                <li>show</li>
-                <li>Arithmetic</li>
-                <li>Nested expressions</li>
-                <li>Multiple statements</li>
-                <li>Variables using set</li>
-                <li>Variable reassignment</li>
-                <li>Variable lookup</li>
-                <li>Variables in arithmetic expressions</li>
-                <li>Comments using <code>//</code></li>
-                <li>Booleans</li>
-                <li>Comparators: ==, !=, &gt;, &lt;, &gt;=, &lt;=</li>
-                <li>Strings</li>
-                <li>Conditionals using <code>if</code> and <code>else</code></li>
-                <li>Step-by-step execution</li>
-            </ul>
-
-            <p>Coming next:</p>
-
-            <ul>
-                <li>Loops</li>
-                <li>Functions</li>
-                <li>Bytecode compiler</li>
-                <li>Zinx Virtual Machine</li>
-            </ul>
-        </div>
-
+<body class="docs-page">
+    <header class="docs-header">
+        <a class="docs-brand" href="./docs.html" aria-label="Zinx documentation home">Zinx <span>Docs</span></a>
+        <a href="./index.html" class="docs-back">Open playground <span aria-hidden="true">→</span></a>
+    </header>
+
+    <div class="docs-layout">
+        <aside class="docs-sidebar" aria-label="Documentation navigation">
+            <p class="docs-nav-label">Getting started</p>
+            <nav class="docs-nav">
+                <a href="#introduction">Introduction</a>
+                <a href="#syntax">Basic syntax</a>
+                <a href="#values">Values</a>
+            </nav>
+            <p class="docs-nav-label">Language guide</p>
+            <nav class="docs-nav">
+                <a href="#output">Output</a>
+                <a href="#variables">Variables</a>
+                <a href="#operators">Operators</a>
+                <a href="#conditionals">Conditionals</a>
+                <a href="#comments">Comments</a>
+            </nav>
+            <p class="docs-nav-label">Reference</p>
+            <nav class="docs-nav">
+                <a href="#errors">Errors</a>
+                <a href="#editor">Using the editor</a>
+                <a href="#status">Language status</a>
+            </nav>
+        </aside>
+
+        <main class="docs-content">
+            <section id="introduction" class="docs-hero">
+                <p class="docs-kicker">Language reference</p>
+                <h1>Write small programs with Zinx.</h1>
+                <p>Zinx is a small, Lisp-inspired programming language built in vanilla JavaScript. Use the playground to write code, inspect tokens and the AST, and run a program one statement at a time.</p>
+                <div class="docs-actions">
+                    <a class="docs-primary-action" href="./index.html">Try the playground <span aria-hidden="true">→</span></a>
+                    <a class="docs-secondary-action" href="#syntax">Read the guide</a>
+                </div>
+            </section>
+
+            <section id="syntax" class="docs-section">
+                <div class="docs-section-heading"><p>01</p><div><h2>Basic syntax</h2><p>Expressions use familiar infix operators: the operator goes between two values.</p></div></div>
+                <div class="docs-example"><div class="docs-example-label">Zinx</div><pre><code>show (5 + 10) * 2</code></pre><div class="docs-result"><span>Output</span><code>30</code></div></div>
+                <p>Parentheses group an expression and override normal operator precedence. Programs can contain several statements; they run from top to bottom.</p>
+            </section>
+
+            <section id="values" class="docs-section">
+                <div class="docs-section-heading"><p>02</p><div><h2>Values</h2><p>Every expression evaluates to a value.</p></div></div>
+                <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Type</th><th>Example</th><th>Notes</th></tr></thead><tbody>
+                    <tr><td>Integer</td><td><code>42</code></td><td>Whole numbers are used in arithmetic.</td></tr>
+                    <tr><td>Boolean</td><td><code>true</code>, <code>false</code></td><td>Used as conditional tests.</td></tr>
+                    <tr><td>String</td><td><code>"Hello"</code></td><td>Double quoted; supports <code>\n</code>, <code>\t</code>, <code>\"</code>, and <code>\\</code>.</td></tr>
+                    <tr><td>Variable</td><td><code>score</code></td><td>Starts with a letter or <code>_</code>; may contain digits and <code>_</code>.</td></tr>
+                </tbody></table></div>
+            </section>
+
+            <section id="output" class="docs-section">
+                <div class="docs-section-heading"><p>03</p><div><h2>Output</h2><p>Use <code>show</code> to display the result of an expression.</p></div></div>
+                <div class="docs-example"><div class="docs-example-label">Zinx</div><pre><code>show 5 + (2 * 3)
+show "Hello, Zinx!"</code></pre><div class="docs-result"><span>Output</span><code>11
+Hello, Zinx!</code></div></div>
+                <p>An expression on its own evaluates but does not add anything to the output panel.</p>
+            </section>
+
+            <section id="variables" class="docs-section">
+                <div class="docs-section-heading"><p>04</p><div><h2>Variables</h2><p>Use <code>set</code> to create a variable or replace its current value.</p></div></div>
+                <div class="docs-example"><div class="docs-example-label">Zinx</div><pre><code>set score 72
+set score score + 8
+show score</code></pre><div class="docs-result"><span>Output</span><code>80</code></div></div>
+                <p>Variables can be used wherever an expression is expected. Reading a name before it has been set raises an error.</p>
+            </section>
+
+            <section id="operators" class="docs-section">
+                <div class="docs-section-heading"><p>05</p><div><h2>Operators</h2><p>Operators combine two expressions and return a new value.</p></div></div>
+                <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Kind</th><th>Operators</th><th>Example</th></tr></thead><tbody>
+                    <tr><td>Arithmetic</td><td><code>+ - * /</code></td><td><code>10 / 2</code></td></tr>
+                    <tr><td>Equality</td><td><code>== !=</code></td><td><code>name == "Zinx"</code></td></tr>
+                    <tr><td>Comparison</td><td><code>&gt; &lt; &gt;= &lt;=</code></td><td><code>score &gt;= 50</code></td></tr>
+                </tbody></table></div>
+                <p>Arithmetic and ordering comparisons require integers. Equality works with integers, booleans, and strings. Precedence is multiplication/division, addition/subtraction, then comparisons.</p>
+            </section>
+
+            <section id="conditionals" class="docs-section docs-feature-section">
+                <div class="docs-section-heading"><p>06</p><div><h2>Conditionals</h2><p>Choose which statement to run with <code>if</code> and <code>else</code>.</p></div></div>
+                <div class="docs-callout"><strong>Condition required</strong><span>The expression inside <code>if ( ... )</code> must evaluate to <code>true</code> or <code>false</code>.</span></div>
+                <div class="docs-example"><div class="docs-example-label">Zinx</div><pre><code>set score 72
+if (score &gt;= 50) (show "Pass") else (show "Try again")</code></pre><div class="docs-result"><span>Output</span><code>Pass</code></div></div>
+                <p>Only the selected branch is executed. Wrap the branch statement in parentheses, as in <code>(show "Pass")</code>. The <code>else</code> branch is optional.</p>
+            </section>
+
+            <section id="comments" class="docs-section">
+                <div class="docs-section-heading"><p>07</p><div><h2>Comments</h2><p>Use <code>//</code> to leave notes in source code.</p></div></div>
+                <div class="docs-example"><div class="docs-example-label">Zinx</div><pre><code>// This runs through the end of the line.
+set message "Ready"
+show message</code></pre><div class="docs-result"><span>Output</span><code>Ready</code></div></div>
+            </section>
+
+            <section id="errors" class="docs-section">
+                <div class="docs-section-heading"><p>08</p><div><h2>Errors</h2><p>Zinx reports an error instead of silently guessing what a program means.</p></div></div>
+                <div class="docs-error-grid"><div><h3>Undefined variable</h3><pre><code>show total</code></pre><p><code>Undefined variable: total</code></p></div><div><h3>Division by zero</h3><pre><code>show 10 / 0</code></pre><p>Division by zero is a runtime error.</p></div></div>
+            </section>
+
+            <section id="editor" class="docs-section">
+                <div class="docs-section-heading"><p>09</p><div><h2>Using the editor</h2><p>The playground makes each stage of running a program visible.</p></div></div>
+                <ul class="docs-checklist"><li><strong>Run</strong> resets program state and runs the complete program.</li><li><strong>Step</strong> runs one statement and retains state until the code changes.</li><li><strong>Cmd/Ctrl + Enter</strong> runs the program; <strong>Tab</strong> inserts four spaces.</li><li>The <strong>Tokens</strong> and <strong>AST</strong> panels expose the lexer and parser output.</li></ul>
+            </section>
+
+            <section id="status" class="docs-section docs-status-section">
+                <div class="docs-section-heading"><p>10</p><div><h2>Language status</h2><p>Zinx is actively evolving. These are the features currently available in the interpreter.</p></div></div>
+                <div class="docs-status-grid"><div><h3>Available now</h3><ul><li>Integers, booleans, and strings</li><li>Variables and reassignment</li><li>Arithmetic and comparisons</li><li>Comments and conditionals</li><li>Step-by-step execution</li></ul></div><div><h3>Planned next</h3><ul><li>Loops</li><li>Functions</li><li>Bytecode compiler</li><li>Zinx virtual machine</li></ul></div></div>
+            </section>
+        </main>
     </div>
-
 </body>
-
 </html>
